@@ -1,7 +1,8 @@
 # GA_Capstone_Project_Backend
 
- - [ ] ## Link to Hosted Working App: 
+## Link to Hosted Working App: 
  - [ ] 
+
 ## Who
 Users of this app understand the importance of mental health, but want a more interactive, hands-on way to learn and practice mental health strengthening techniques than traditional therapy, workbooks, or audio/video meditation. May scale for therapists and counselors.
 
