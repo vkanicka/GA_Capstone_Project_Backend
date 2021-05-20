@@ -52,6 +52,17 @@ Key | Name | Description
 5 | Explore Strengths | What are 10 things...
 6 | Gratitude | Think of three specific...
 
+Users
+Key | Name | Email | Password
+------------ | -------------  | -------------  | -------------
+1 | Victoria | vk@vk.com | puppy
+
+UserExerciseMap
+Key | Exercise | User | Completed | Completed_Count | Favorite
+------------ | -------------  | ------------- | ------------- | ------------- | -------------
+1 | {1 Diaphram Breathing...} | {1 Victoria...} | 1 or True | 4 | 1 or True
+
+
 Tags
 Key | Tag
 ------------ | -------------
