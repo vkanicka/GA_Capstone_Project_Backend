@@ -1,12 +1,21 @@
 # GA_Capstone_Project_Backend
 
-#### Link to Hosted Working App: 
+##### Link to Hosted Working App
  - [ ] tbd 
+
+##### Description 
+An app that matches a user's current thoughts, feelings and behaviors with mental health exercises specific to their needs.
+
+##### Technologies Used
+Python, Flask, SQL, React 
+
+##### Installation Steps
+ - [ ] tbd
 
 ## Who
 Users of this app understand the importance of mental health, but want a more interactive, hands-on way to learn and practice mental health strengthening techniques than traditional therapy, workbooks, or audio/video meditation. May scale for therapists and counselors.
 
-## MVP Features
+## User Stories (MVP)
  - [ ] Users can create an account and login
  - [ ] Users can communicate how they’re doing to the app via a selection of inputs that may include emojis, sliders and clickable buttons for emotions, thoughts and behaviors
  - [ ] User will receive mirroring response from app (Ex. “It sounds like you may be feeling ______, is that right?)
@@ -28,6 +37,9 @@ Users of this app understand the importance of mental health, but want a more in
  - [ ] Option 2: Dashboard with widgets and progress tracking
  - [ ] Option 3: Avatar personalization
 
-## Data Models
+## Data Models / Entity Relationship Diagrams
  - [ ] Exercise
  - [ ] User
+
+## Unsolved Problems and Future Features
+ - [ ] tbd
