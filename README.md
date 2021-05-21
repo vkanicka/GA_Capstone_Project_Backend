@@ -16,7 +16,7 @@ Python, Flask, SQL, React
 Users of this app understand the importance of mental health, but want a more interactive, hands-on way to learn and practice mental health strengthening techniques than traditional therapy, workbooks, or audio/video meditation. May scale for therapists and counselors.
 
 ## User Stories (MVP)
- - [ ] Users can create an account and login
+ - [x] Users can create an account and login
  - [ ] Users can communicate how they’re doing to the app via a selection of inputs that may include emojis, sliders and clickable buttons for emotions, thoughts and behaviors
  - [ ] User will receive mirroring response from app (Ex. “It sounds like you may be feeling ______, is that right?)
  - [ ] Users can receive suggestion(s) on what exercises to complete within the app based on their daily input
