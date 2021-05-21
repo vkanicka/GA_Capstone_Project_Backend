@@ -45,7 +45,7 @@ def add(exercise_id):
     user_exercise_dict = model_to_dict(new_exercise)
     return jsonify(
         data=user_exercise_dict,
-        message='Successfully add exercise to user!',
+        message='Successfully added exercise to user!',
         status=201
     ), 201
 
@@ -74,3 +74,15 @@ def update_user_exercise(user_exercise_id):
         status = 200,
         message = 'resource updated successfully'
     ), 200
+
+#--------------------------------------------
+# DELETE USER EXERCISE
+#--------------------------------------------
+@userexercises.route('/<user_exercise_id>', methods=["DELETE"])
+def delete_user_exercise(user_exercise_id):
+    models.UserExercise.delete().where(models.UserExercise.id==user_exercise_id).execute()
+    return jsonify(
+        data = None,
+        status = 200,
+        message = 'resource deleted successfully'
+    )
