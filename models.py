@@ -21,7 +21,7 @@ class Exercise(Model):
         database = DATABASE
 
 class UserExercise(Model):
-    user= ForeignKeyField(User)
+    user= ForeignKeyField(User, backref="this_users_exercises")
     exercise = ForeignKeyField(Exercise)
     completed = BooleanField()
     completed_count = IntegerField()
