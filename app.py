@@ -5,6 +5,9 @@ from flask import Flask, g, jsonify
 from resources.exercises import exercises
 from resources.users import users
 from resources.userexercises import userexercises
+from resources.inputforms import inputforms
+
+# User, Exercise, UserExercise, Tag, ExerciseTags, Emotion, Thought, Behavior, EmotionTags, ThoughtTags, BehaviorTags, InputForm, InputFormEmotions, InputFormThoughts, InputFormBehaviors
 import models
 from flask_cors import CORS
 from flask_login import LoginManager
@@ -54,6 +57,9 @@ def load_user(user_id):
 CORS(exercises, origins=['http://localhost:3000'], supports_credentials=True)
 CORS(users, origins=['http://localhost:3000'], supports_credentials=True)
 CORS(userexercises, origins=['http://localhost:3000'], supports_credentials=True)
+CORS(inputforms, origins=['http://localhost:3000'], supports_credentials=True)
+
+# User, Exercise, UserExercise, Tag, ExerciseTags, Emotion, Thought, Behavior, EmotionTags, ThoughtTags, BehaviorTags, InputForm, InputFormEmotions, InputFormThoughts, InputFormBehaviors
 
 #--------------------------------------------
 # REGISTER BLUEPRINTS
@@ -61,6 +67,11 @@ CORS(userexercises, origins=['http://localhost:3000'], supports_credentials=True
 app.register_blueprint(exercises, url_prefix='/api/v1/exercises')
 app.register_blueprint(users, url_prefix='/api/v1/users')
 app.register_blueprint(userexercises, url_prefix='/api/v1/userexercises')
+app.register_blueprint(inputforms, url_prefix='/api/v1/inputforms')
+
+
+
+# User, Exercise, UserExercise, Tag, ExerciseTags, Emotion, Thought, Behavior, EmotionTags, ThoughtTags, BehaviorTags, InputForm, InputFormEmotions, InputFormThoughts, InputFormBehaviors
 
 
 #--------------------------------------------
