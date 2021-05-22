@@ -38,8 +38,8 @@ Users of this app understand the importance of mental health, but want a more in
  - [ ] Option 3: Avatar personalization
 
 ## Data Models
- - [ ] Exercise
- - [ ] User
+ - [x] Exercise
+ - [x] User
 
 ## Entity Relationship Diagrams
 Exercises
@@ -79,7 +79,7 @@ Key | Tag
 11 | Acceptance
 12 | Self Esteem
 
-Feelings
+Emotions
 Key | Feeling
 ------------ | -------------
 1 | Happy
@@ -175,9 +175,29 @@ Input Form List
 Key | User | DateTime
 ------------ | ------------- | -------------
 1 | 1 | 1:02pm 3/21/2021
-1 | 1 | 12:20pm 3/22/2021
-1 | 2 | 9:09pm 3/23/2021
+2 | 1 | 12:20pm 3/22/2021
+3 | 2 | 9:09pm 3/23/2021
 
+Input Form Emotions
+Key | Form ID | Emotion
+------------ | ------------- | -------------
+1 | 1 | 4 - Stressed
+2 | 1 | 5 - Overwhelmed
+3 | 2 | 6 - Annoyed
+
+Input Form Thoughts
+Key | Form ID | Thoughts
+------------ | ------------- | -------------
+1 | 1 | 1
+2 | 1 | 2
+3 | 2 | 5
+
+Input Form Behaviors
+Key | Form ID | Behaviors
+------------ | ------------- | -------------
+1 | 1 | 1
+2 | 1 | 2
+3 | 2 | 3
 
 ## Unsolved Problems and Future Features
  - [ ] tbd
