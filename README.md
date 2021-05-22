@@ -18,6 +18,7 @@ Users of this app understand the importance of mental health, but want a more in
 ## User Stories (MVP)
  - [x] Users can create an account and login
  - [ ] Users can communicate how they’re doing to the app via a selection of inputs that may include emojis, sliders and clickable buttons for emotions, thoughts and behaviors
+ - [x] Exercises will have tags to help user and app search for appropriate exercises
  - [ ] User will receive mirroring response from app (Ex. “It sounds like you may be feeling ______, is that right?)
  - [ ] Users can receive suggestion(s) on what exercises to complete within the app based on their daily input
 
@@ -25,7 +26,6 @@ Users of this app understand the importance of mental health, but want a more in
  - [ ] App may ask user follow up questions to better estimate most helpful path for user
  - [ ] User can create customizable avatar
  - [ ] Exercises will feature helper characters (ex. Psychic, scientist, etc.)
- - [ ] Exercises will have tags to help user and app search for appropriate exercises
  - [ ] User will receive summary of session (optional: via email?)
  - [ ] Exercises will have a timer with recommended amount of time (Ex. 5minutes, 3-10minutes)
  - [ ] App will track and visualize user’s progress in building various skills
@@ -79,16 +79,6 @@ Key | Tag
 11 | Acceptance
 12 | Self Esteem
 
-Emotions
-Key | Feeling
------------- | -------------
-1 | Happy
-2 | Sad
-3 | Angry
-4 | Stressed 
-5 | Overwhelmed
-6 | Annoyed
-
 Exercise Tags
 Key | Exercise ID | Tag ID
 ------------ | ------------- | -------------
@@ -98,6 +88,18 @@ Key | Exercise ID | Tag ID
 4 | 1 | 2
 5 | 4 | 4
 6 | 4 | 5
+
+**Considering Adding Tag to ETB tables, but maybe not since one ETB can have many tags**
+
+Emotions
+Key | Feeling
+------------ | -------------
+1 | Happy
+2 | Sad
+3 | Angry
+4 | Stressed 
+5 | Overwhelmed
+6 | Annoyed
 
 Thoughts
 Key | Thought
@@ -177,6 +179,16 @@ Key | User | DateTime
 1 | 1 | 1:02pm 3/21/2021
 2 | 1 | 12:20pm 3/22/2021
 3 | 2 | 9:09pm 3/23/2021
+
+Input Form Details
+Key | Form ID | Type | Name/ID
+------------ | ------------- | -------------  | -------------
+1 | 1 | Emotion | Stressed
+2 | 1 | Emotion | Overwhelmed
+3 | 1 | Thought | I don't know how I will start...
+4 | 1 | Behavior | Prograstinating
+
+OR below 3 tables:
 
 Input Form Emotions
 Key | Form ID | Emotion
