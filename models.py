@@ -27,21 +27,15 @@ class Exercise(Model):
         database = DATABASE
 def add_exercise_seed():
     exercises = [
-        {'name': 'Time Management Exercise',
-        'description': 'List tasks. Set due dates. Prioritize. Determine ONE next right thing. Do I know how to do this? Break down into specific manageable steps. Anything that feels overwhelming - break it down even more. Schedule the task. Set an alarm reminder and a timer.'
-        },
-        {'name': 'Self-Compassion Meditation',
-        'description': '...tbd description...'
-        },
-        {'name': 'Diaphram Breathing',
-        'description': 'Breathe in 5. Hold for 3. Breathe out 7.'
-        },
-        {'name': '54321 Grounding',
-        'description': 'Count 5 things I see. Count 4 things I hear. Count 3 things I feel.'
-        },
+    ("Diaphram Breathing", "Breathe in deeply..."),
+ 	("Time Management Exercise",	"Start by listing tasks..."),
+ 	("Self-Compassion Meditation",	"Close your eyes..."),
+ 	("Restorative Communicatio",	"Follow these steps..."),
+ 	("Explore Strengths",	"What are 10 things..."),
+ 	("Gratitude",	"Think of three specific..."),
     ]
     for exercise in exercises:
-        Exercise(name=exercise['name'], description=exercise['description']).save()
+        Exercise(name=exercise[0], description=exercise[1]).save()
     print('exercise seed added')
 
 class UserExercise(Model):
@@ -88,10 +82,10 @@ class ExerciseTags(Model):
         database = DATABASE
 def add_exercise_tags_seed():
     exercise_tags = [
+    (1,2),
     (2,1),
     (2,2),
     (3,3),
-    (1,2),
     (4,4),
     (4,5)
     ]
