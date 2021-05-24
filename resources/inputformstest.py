@@ -9,14 +9,14 @@ from flask_login import current_user#, login_required
 #--------------------------------------------
 # CREATE BLUEPRINT
 #--------------------------------------------
-inputforms = Blueprint('inputforms', 'inputforms')
+inputformstest = Blueprint('inputformstest', 'inputformstest')
 
 #--------------------------------------------
 # GET EXERCISES
 #--------------------------------------------
-@inputforms.route('/', methods=['GET'])
+@inputformstest.route('/', methods=['GET'])
 def inputforms_index():
-    result = models.InputForm.select()
+    result = models.InputFormTest.select()
     input_form_dicts = [model_to_dict(input_form) for input_form in result]
     return jsonify({
         'data': input_form_dicts,
@@ -27,14 +27,13 @@ def inputforms_index():
 #--------------------------------------------
 # CREATE EXERCISE
 #--------------------------------------------
-@inputforms.route('/', methods=['POST'])
+@inputformstest.route('/', methods=['POST'])
 # @login_required
 def create_input_form():
     payload = request.get_json()
     print(payload)
-    new_input_form = models.InputForm.create(
-    user=current_user.id,
-    **payload
+    new_input_form = models.InputFormTest.create(
+    user=current_user.id
     )
     input_form_dict = model_to_dict(new_input_form)
     return jsonify(
@@ -48,9 +47,9 @@ def create_input_form():
 #--------------------------------------------
 # SHOW EXERCISE
 #--------------------------------------------
-@inputforms.route('/<id>', methods=["GET"])
+@inputformstest.route('/<id>', methods=["GET"])
 def get_one_input_form(id):
-    input_form = models.InputForm.get_by_id(id)
+    input_form = models.InputFormTest.get_by_id(id)
     return jsonify(
     data = model_to_dict(input_form),
     message = 'Success!!',
@@ -60,12 +59,12 @@ def get_one_input_form(id):
 #--------------------------------------------
 # UPDATE EXERCISE
 #--------------------------------------------
-@inputforms.route('/<id>', methods=["PUT"])
+@inputformstest.route('/<id>', methods=["PUT"])
 def update_input_form(id):
     payload = request.get_json()
-    models.InputForm.update(**payload).where(models.InputForm.id==id).execute()
+    models.InputFormTest.update(**payload).where(models.InputFormTest.id==id).execute()
     return jsonify(
-        data = model_to_dict(models.InputForm.get_by_id(id)),
+        data = model_to_dict(models.InputFormTest.get_by_id(id)),
         status = 200,
         message = 'resource updated successfully'
     ), 200
@@ -73,9 +72,9 @@ def update_input_form(id):
 #--------------------------------------------
 # DELETE EXERCISE
 #--------------------------------------------
-@inputforms.route('/<id>', methods=["DELETE"])
+@inputformstest.route('/<id>', methods=["DELETE"])
 def delete_input_form(id):
-    models.InputForm.delete().where(models.InputForm.id==id).execute()
+    models.InputFormTest.delete().where(models.InputFormTest.id==id).execute()
     return jsonify(
         data = None,
         status = 200,

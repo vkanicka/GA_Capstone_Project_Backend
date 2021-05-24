@@ -6,6 +6,7 @@ from resources.exercises import exercises
 from resources.users import users
 from resources.userexercises import userexercises
 from resources.inputforms import inputforms
+from resources.inputformstest import inputformstest
 
 # User, Exercise, UserExercise, Tag, ExerciseTags, Emotion, Thought, Behavior, EmotionTags, ThoughtTags, BehaviorTags, InputForm, InputFormEmotions, InputFormThoughts, InputFormBehaviors
 import models
@@ -58,6 +59,7 @@ CORS(exercises, origins=['http://localhost:3000'], supports_credentials=True)
 CORS(users, origins=['http://localhost:3000'], supports_credentials=True)
 CORS(userexercises, origins=['http://localhost:3000'], supports_credentials=True)
 CORS(inputforms, origins=['http://localhost:3000'], supports_credentials=True)
+CORS(inputformstest, origins=['http://localhost:3000'], supports_credentials=True)
 
 # User, Exercise, UserExercise, Tag, ExerciseTags, Emotion, Thought, Behavior, EmotionTags, ThoughtTags, BehaviorTags, InputForm, InputFormEmotions, InputFormThoughts, InputFormBehaviors
 
@@ -68,6 +70,7 @@ app.register_blueprint(exercises, url_prefix='/api/v1/exercises')
 app.register_blueprint(users, url_prefix='/api/v1/users')
 app.register_blueprint(userexercises, url_prefix='/api/v1/userexercises')
 app.register_blueprint(inputforms, url_prefix='/api/v1/inputforms')
+app.register_blueprint(inputformstest, url_prefix='/api/v1/inputformstest')
 
 
 
