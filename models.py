@@ -93,21 +93,20 @@ def add_exercise_tags_seed():
         ExerciseTags(exercise=t[0], tag=t[1]).save()
     print('exercise tag seed added')
 
+emotions = [
+'Happy',
+'Sad',
+'Angry',
+'Stressed',
+'Overwhelmed',
+'Annoyed'
+]
 class Emotion(Model):
     emotion = CharField()
     created_at: DateTimeField(default=datetime.datetime.now)
     class Meta:
         database = DATABASE
 def add_emotion_seed():
-    emotions = [
-    'Happy',
-    'Sad',
-    'Angry',
-    'Stressed',
-    'Overwhelmed',
-    'Annoyed'
-    ]
-
     for this_emotion in emotions:
         Emotion(emotion=this_emotion).save()
     print('emotion seed added')
@@ -225,8 +224,22 @@ def add_behavior_tags():
         BehaviorTags(behavior_id=i[0],tag_id=i[1]).save()
     print('behavior tags seed added')
 
+
 class InputForm(Model):
-    user = ForeignKeyField(User)
+    user= ForeignKeyField(User, backref="this_users_input_forms")
+    Happy = BooleanField()
+    Sad  = BooleanField()
+    Angry  = BooleanField()
+    Stressed  = BooleanField()
+    Overwhelmed = BooleanField()
+    created_at: DateTimeField(default=datetime.datetime.now)
+    class Meta:
+        database = DATABASE
+
+class InputFormTest(Model):
+    user= ForeignKeyField(User, backref="this_users_input_forms")
+    test='test'
+    form_datetime=DateTimeField(default=datetime.datetime.now)
     created_at: DateTimeField(default=datetime.datetime.now)
     class Meta:
         database = DATABASE
@@ -266,7 +279,7 @@ def add_seeds():
 
 def initialize():
     DATABASE.connect()
-    tables = [User, Exercise, UserExercise, Tag, ExerciseTags, Emotion, Thought, Behavior, EmotionTags, ThoughtTags, BehaviorTags, InputForm, InputFormEmotions, InputFormThoughts, InputFormBehaviors]
+    tables = [User, Exercise, UserExercise, Tag, ExerciseTags, Emotion, Thought, Behavior, EmotionTags, ThoughtTags, BehaviorTags, InputForm, InputFormEmotions, InputFormThoughts, InputFormBehaviors, InputFormTest]
     for table in tables:
         DATABASE.drop_tables([table], safe=True)
         DATABASE.create_tables([table], safe=True)
