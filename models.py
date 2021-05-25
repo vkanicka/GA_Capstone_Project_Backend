@@ -17,7 +17,6 @@ class User(UserMixin, Model):
         database = DATABASE
 def add_user_seed():
     User(username='exampleUser',email='example@email.com',password='easyLogin').save()
-    print('user seed added')
 
 class Exercise(Model):
     name = CharField()
@@ -36,7 +35,6 @@ def add_exercise_seed():
     ]
     for exercise in exercises:
         Exercise(name=exercise[0], description=exercise[1]).save()
-    print('exercise seed added')
 
 class UserExercise(Model):
     user= ForeignKeyField(User, backref="this_users_exercises")
@@ -71,7 +69,6 @@ def add_tag_seed():
     ]
     for this_tag in tags:
         Tag(tag=this_tag).save()
-    print('tag seed added')
 
 class ExerciseTags(Model):
     exercise = ForeignKeyField(Exercise)
@@ -91,7 +88,6 @@ def add_exercise_tags_seed():
     ]
     for t in exercise_tags:
         ExerciseTags(exercise=t[0], tag=t[1]).save()
-    print('exercise tag seed added')
 
 emotions = [
 'Happy',
@@ -109,7 +105,6 @@ class Emotion(Model):
 def add_emotion_seed():
     for this_emotion in emotions:
         Emotion(emotion=this_emotion).save()
-    print('emotion seed added')
 class EmotionTags(Model):
     emotion = ForeignKeyField(Emotion)
     tag = ForeignKeyField(Tag)
@@ -136,7 +131,6 @@ def add_emotion_tags_seed():
 
     for i in emotion_tags:
         EmotionTags(emotion=i[0],tag=i[1]).save()
-    print('emotion tag seed added')
 
 class Thought(Model):
     thought = CharField()
@@ -156,7 +150,6 @@ def add_thought_seed():
     ]
     for i in thoughts:
         Thought(thought=i).save()
-    print('thought seed added')
 class ThoughtTags(Model):
     thought = ForeignKeyField(Thought)
     tag = ForeignKeyField(Tag)
@@ -178,7 +171,6 @@ def add_thought_tags():
     ]
     for t in thought_tags:
         ThoughtTags(thought=t[0], tag=t[1]).save()
-    print('thought tag seed added')
 
 class Behavior(Model):
     behavior = CharField()
@@ -195,7 +187,6 @@ def add_behavior_seed():
     ]
     for i in behaviors:
         Behavior(behavior=i).save()
-    print('behavior seed added')
 class BehaviorTags(Model):
     behavior = ForeignKeyField(Behavior)
     tag = ForeignKeyField(Tag)
@@ -222,8 +213,6 @@ def add_behavior_tags():
     ]
     for i in behavior_tags:
         BehaviorTags(behavior_id=i[0],tag_id=i[1]).save()
-    print('behavior tags seed added')
-
 
 class InputForm(Model):
     user= ForeignKeyField(User, backref="this_users_input_forms")
