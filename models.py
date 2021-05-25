@@ -1,7 +1,23 @@
+#--------------------------------------------
+# IMPORTS
+#--------------------------------------------
 from peewee import *
 import datetime
 from flask_login import UserMixin
+from resources.filelist import model_list
+from resources.seeds.exercises import exercises
+from resources.seeds.tags import tags
+from resources.seeds.exercise_tags import exercise_tags
+from resources.seeds.emotions import emotions
+from resources.seeds.emotion_tags import emotion_tags
+from resources.seeds.thoughts import thoughts
+from resources.seeds.thought_tags import thought_tags
+from resources.seeds.behaviors import behaviors
+from resources.seeds.behavior_tags import behavior_tags
 
+#--------------------------------------------
+# DATABASE ENVIRONMENT
+#--------------------------------------------
 def select_database(environment):
     if environment == 'development':
         return SqliteDatabase('capstone.sqlite')
@@ -9,6 +25,9 @@ def select_database(environment):
         return PostgresqlDatabase('capstone', user='postgres')
 DATABASE = select_database('development')
 
+#--------------------------------------------
+# CREATE MODELS
+#--------------------------------------------
 class User(UserMixin, Model):
     username=CharField(unique=True)
     email=CharField(unique=True)
@@ -25,14 +44,6 @@ class Exercise(Model):
     class Meta:
         database = DATABASE
 def add_exercise_seed():
-    exercises = [
-    ("Diaphram Breathing", "Breathe in deeply..."),
- 	("Time Management Exercise",	"Start by listing tasks..."),
- 	("Self-Compassion Meditation",	"Close your eyes..."),
- 	("Restorative Communicatio",	"Follow these steps..."),
- 	("Explore Strengths",	"What are 10 things..."),
- 	("Gratitude",	"Think of three specific..."),
-    ]
     for exercise in exercises:
         Exercise(name=exercise[0], description=exercise[1]).save()
 
@@ -53,20 +64,6 @@ class Tag(Model):
     class Meta:
         database = DATABASE
 def add_tag_seed():
-    tags = [
-    'Time Management',
-    'Stress',
-    'Self-Compassion',
-    'Conflict',
-    'Communication',
-    'Depression',
-    'Anxiety',
-    'Social Anxiety',
-    'Fear',
-    'Anger',
-    'Acceptance',
-    'Self Esteem'
-    ]
     for this_tag in tags:
         Tag(tag=this_tag).save()
 
@@ -78,33 +75,17 @@ class ExerciseTags(Model):
     class Meta:
         database = DATABASE
 def add_exercise_tags_seed():
-    exercise_tags = [
-    (1,2),
-    (2,1),
-    (2,2),
-    (3,3),
-    (4,4),
-    (4,5)
-    ]
     for t in exercise_tags:
         ExerciseTags(exercise=t[0], tag=t[1]).save()
 
-emotions = [
-'Happy',
-'Sad',
-'Angry',
-'Stressed',
-'Overwhelmed',
-'Annoyed'
-]
 class Emotion(Model):
     emotion = CharField()
     created_at: DateTimeField(default=datetime.datetime.now)
     class Meta:
         database = DATABASE
-def add_emotion_seed():
-    for this_emotion in emotions:
-        Emotion(emotion=this_emotion).save()
+        def __init__(self):
+            self.add_list_seed(self.name, emotions, emotion)
+
 class EmotionTags(Model):
     emotion = ForeignKeyField(Emotion)
     tag = ForeignKeyField(Tag)
@@ -112,23 +93,6 @@ class EmotionTags(Model):
     class Meta:
         database = DATABASE
 def add_emotion_tags_seed():
-    emotion_tags = [
-    (2,6),
-    (3,4),
-    (3,5),
-    (3,10),
-    (4,1),
-    (4,2),
-    (4,7),
-    (5,1),
-    (5,2),
-    (5,6),
-    (5,7),
-    (6,4),
-    (6,5),
-    (6,10)
-    ]
-
     for i in emotion_tags:
         EmotionTags(emotion=i[0],tag=i[1]).save()
 
@@ -137,80 +101,35 @@ class Thought(Model):
     created_at: DateTimeField(default=datetime.datetime.now)
     class Meta:
         database = DATABASE
-def add_thought_seed():
-    thoughts = [
-    "I have no idea how to start",
- 	"I will never finish this",
- 	"Nothing matters",
- 	"I want to give up",
- 	"I wish I didn't feel this way",
- 	"I should be more productive",
- 	"My thoughts are racing",
- 	"I am too (negative adjective)"
-    ]
-    for i in thoughts:
-        Thought(thought=i).save()
+        def __init__(self):
+            self.add_list_seed(self)
+
 class ThoughtTags(Model):
     thought = ForeignKeyField(Thought)
     tag = ForeignKeyField(Tag)
     created_at: DateTimeField(default=datetime.datetime.now)
     class Meta:
         database = DATABASE
-def add_thought_tags():
-    thought_tags = [
-    (1, 1),
-    (2, 1),
-    (2, 2),
-    (3, 6),
-    (4, 6),
-    (5, 11),
-    (6, 3),
-    (7, 7),
-    (8, 11),
-    (8, 12)
-    ]
-    for t in thought_tags:
-        ThoughtTags(thought=t[0], tag=t[1]).save()
+        def __init__(self):
+            self.add_tuple_seed(self)
 
 class Behavior(Model):
     behavior = CharField()
     created_at: DateTimeField(default=datetime.datetime.now)
     class Meta:
         database = DATABASE
-def add_behavior_seed():
-    behaviors = [
-    "Procrastinating",
- 	"Overthinking",
- 	"Avoiding",
- 	"Withdrawing",
- 	"Isolating"
-    ]
-    for i in behaviors:
-        Behavior(behavior=i).save()
+        def __init__(self):
+            self.add_list_seed(self.name, behaviors, behavior)
+
 class BehaviorTags(Model):
     behavior = ForeignKeyField(Behavior)
     tag = ForeignKeyField(Tag)
     created_at: DateTimeField(default=datetime.datetime.now)
     class Meta:
         database = DATABASE
+        def __init__(self):
+            self.add_tuple_seed(this.name, behavior_tags, behavior, tag)
 def add_behavior_tags():
-    behavior_tags = [
-    (1,1),
-    (1,7),
-    (2,1),
-    (2,2),
-    (2,7),
-    (3,1),
-    (3,4),
-    (3,8),
-    (3,9),
-    (3,10),
-    (4,4),
-    (4,6),
-    (4,8),
-    (5,6),
-    (5,8)
-    ]
     for i in behavior_tags:
         BehaviorTags(behavior_id=i[0],tag_id=i[1]).save()
 
@@ -254,18 +173,38 @@ class InputFormBehaviors(Model):
     class Meta:
         database = DATABASE
 
+#--------------------------------------------
+# ADD SEEDS
+#--------------------------------------------
+def add_list_seed():
+    for i in seed_list:
+        seed_model(model_field=i).save()
+def add_tuple_seed():
+    for i in seed_list:
+        seed_model(model_field_1=seed_list[0], model_field_2=seed_list[1]).save()
+
+# def add_seed(seed_model,seed_list,model_field):
+#     for i in seed_list:
+#         seed_model(model_field=i).save()
+# def add_tuple_seed(seed_model,seed_list,model_field_1, model_field_2):
+#     for i in seed_list:
+#         seed_model(model_field_1=seed_list[0], model_field_2=seed_list[1]).save()
+
 def add_seeds():
     add_user_seed()
     add_exercise_seed()
     add_tag_seed()
-    add_emotion_seed()
+    # add_emotion_seed()
     add_emotion_tags_seed()
     add_exercise_tags_seed()
-    add_thought_seed()
-    add_thought_tags()
-    add_behavior_seed()
+    # add_thought_seed()
+    # add_thought_tags()
+    # add_behavior_seed()
     add_behavior_tags()
 
+#--------------------------------------------
+# INITIALIZE DATABASE AND TABLES
+#--------------------------------------------
 def initialize():
     DATABASE.connect()
     tables = [User, Exercise, UserExercise, Tag, ExerciseTags, Emotion, Thought, Behavior, EmotionTags, ThoughtTags, BehaviorTags, InputForm, InputFormEmotions, InputFormThoughts, InputFormBehaviors, InputFormTest]

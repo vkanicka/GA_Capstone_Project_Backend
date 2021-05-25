@@ -1,8 +1,6 @@
 #--------------------------------------------
 # IMPORTS
 #--------------------------------------------
-
-
 from flask import Flask, g, jsonify
 from resources.exercises import exercises
 from resources.users import users
