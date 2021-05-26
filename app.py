@@ -12,8 +12,9 @@ from flask_cors import CORS
 from flask_login import LoginManager
 import os
 from dotenv import load_dotenv
+from resources.filelist import string_model_list
 
-model_list = [users,exercises,userexercises,inputforms, inputformstest
+model_list = [users,exercises,inputforms, inputformstest,userexercises
 # ,tag,exercisetags,emotion,thought,behavior,emotiontags,thoughttags,behaviortags,inputform,inputformemotions,inputformthoughts,inputformbehaviors
 ]
 
@@ -57,12 +58,22 @@ def load_user(user_id):
 #--------------------------------------------
 # CORS
 #--------------------------------------------
+# CORS(exercises, origins=['http://localhost:3000'], supports_credentials=True)
+# CORS(users, origins=['http://localhost:3000'], supports_credentials=True)
+# CORS(userexercises, origins=['http://localhost:3000'], supports_credentials=True)
+# CORS(inputforms, origins=['http://localhost:3000'], supports_credentials=True)
+# CORS(inputformstest, origins=['http://localhost:3000'], supports_credentials=True)
+
 for model in model_list:
     CORS(model, origins=['http://localhost:3000'], supports_credentials=True)
 #--------------------------------------------
 # REGISTER BLUEPRINTS
 #--------------------------------------------
-    app.register_blueprint(model, url_prefix=f'/api/v1/{str(__name__)}')
+app.register_blueprint(exercises, url_prefix='/api/v1/exercises')
+app.register_blueprint(users, url_prefix='/api/v1/users')
+app.register_blueprint(userexercises, url_prefix='/api/v1/userexercises')
+app.register_blueprint(inputforms, url_prefix='/api/v1/inputforms')
+app.register_blueprint(inputformstest, url_prefix='/api/v1/inputformstest')
 
 #--------------------------------------------
 # CREATE TABLES AND RUN APP
