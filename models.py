@@ -78,14 +78,18 @@ def add_exercise_tags_seed():
     for t in exercise_tags:
         ExerciseTags(exercise=t[0], tag=t[1]).save()
 
+# def add_list_seed(seed_model,seed_list,model_field):
+#     for i in seed_list:
+#         seed_model(model_field=i).save()
+
 class Emotion(Model):
     emotion = CharField()
     created_at: DateTimeField(default=datetime.datetime.now)
     class Meta:
         database = DATABASE
-        def __init__(self):
-            self.add_list_seed(self.name, emotions, emotion)
-
+def add_emotion_seed():
+    for i in emotions:
+        Emotion(emotion=i).save()
 class EmotionTags(Model):
     emotion = ForeignKeyField(Emotion)
     tag = ForeignKeyField(Tag)
@@ -95,40 +99,37 @@ class EmotionTags(Model):
 def add_emotion_tags_seed():
     for i in emotion_tags:
         EmotionTags(emotion=i[0],tag=i[1]).save()
-
 class Thought(Model):
     thought = CharField()
     created_at: DateTimeField(default=datetime.datetime.now)
     class Meta:
         database = DATABASE
-        def __init__(self):
-            self.add_list_seed(self)
-
+def add_thought_seed():
+    for i in thoughts:
+        Thought(thought=i).save()
 class ThoughtTags(Model):
     thought = ForeignKeyField(Thought)
     tag = ForeignKeyField(Tag)
     created_at: DateTimeField(default=datetime.datetime.now)
     class Meta:
         database = DATABASE
-        def __init__(self):
-            self.add_tuple_seed(self)
-
+def add_thought_tags():
+    for t in thought_tags:
+        ThoughtTags(thought=t[0], tag=t[1]).save()
 class Behavior(Model):
     behavior = CharField()
     created_at: DateTimeField(default=datetime.datetime.now)
     class Meta:
         database = DATABASE
-        def __init__(self):
-            self.add_list_seed(self.name, behaviors, behavior)
-
+def add_behavior_seed():
+    for i in behaviors:
+        Behavior(behavior=i).save()
 class BehaviorTags(Model):
     behavior = ForeignKeyField(Behavior)
     tag = ForeignKeyField(Tag)
     created_at: DateTimeField(default=datetime.datetime.now)
     class Meta:
         database = DATABASE
-        def __init__(self):
-            self.add_tuple_seed(this.name, behavior_tags, behavior, tag)
 def add_behavior_tags():
     for i in behavior_tags:
         BehaviorTags(behavior_id=i[0],tag_id=i[1]).save()
@@ -143,7 +144,6 @@ class InputForm(Model):
     created_at: DateTimeField(default=datetime.datetime.now)
     class Meta:
         database = DATABASE
-
 class InputFormTest(Model):
     user= ForeignKeyField(User, backref="this_users_input_forms")
     test='test'
@@ -151,21 +151,18 @@ class InputFormTest(Model):
     created_at: DateTimeField(default=datetime.datetime.now)
     class Meta:
         database = DATABASE
-
 class InputFormEmotions(Model):
     form = ForeignKeyField(InputForm)
     emotion = ForeignKeyField(Emotion)
     created_at: DateTimeField(default=datetime.datetime.now)
     class Meta:
         database = DATABASE
-
 class InputFormThoughts(Model):
     form = ForeignKeyField(InputForm)
     emotion = ForeignKeyField(Thought)
     created_at: DateTimeField(default=datetime.datetime.now)
     class Meta:
         database = DATABASE
-
 class InputFormBehaviors(Model):
     form = ForeignKeyField(InputForm)
     emotion = ForeignKeyField(Behavior)
@@ -176,30 +173,16 @@ class InputFormBehaviors(Model):
 #--------------------------------------------
 # ADD SEEDS
 #--------------------------------------------
-def add_list_seed():
-    for i in seed_list:
-        seed_model(model_field=i).save()
-def add_tuple_seed():
-    for i in seed_list:
-        seed_model(model_field_1=seed_list[0], model_field_2=seed_list[1]).save()
-
-# def add_seed(seed_model,seed_list,model_field):
-#     for i in seed_list:
-#         seed_model(model_field=i).save()
-# def add_tuple_seed(seed_model,seed_list,model_field_1, model_field_2):
-#     for i in seed_list:
-#         seed_model(model_field_1=seed_list[0], model_field_2=seed_list[1]).save()
-
 def add_seeds():
     add_user_seed()
     add_exercise_seed()
     add_tag_seed()
-    # add_emotion_seed()
+    add_emotion_seed()
     add_emotion_tags_seed()
     add_exercise_tags_seed()
-    # add_thought_seed()
-    # add_thought_tags()
-    # add_behavior_seed()
+    add_thought_seed()
+    add_thought_tags()
+    add_behavior_seed()
     add_behavior_tags()
 
 #--------------------------------------------
