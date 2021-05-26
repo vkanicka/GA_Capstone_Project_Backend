@@ -4,7 +4,6 @@
 from peewee import *
 import datetime
 from flask_login import UserMixin
-from resources.filelist import model_list
 from resources.seeds.exercises import exercises
 from resources.seeds.tags import tags
 from resources.seeds.exercise_tags import exercise_tags
