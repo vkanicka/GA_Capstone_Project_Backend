@@ -75,7 +75,9 @@ def register():
 #--------------------------------------------
 @users.route('/login', methods=['POST'])
 def login():
+    print('login route!')
     payload = request.get_json()
+    print(payload)
     payload['email'] = payload['email'].lower()
     payload['username'] = payload['username'].lower()
 # IS EMAIL ADDRESS A REGISTERED USER?

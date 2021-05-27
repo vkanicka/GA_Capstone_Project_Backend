@@ -34,7 +34,7 @@ class User(UserMixin, Model):
     class Meta:
         database = DATABASE
 def add_user_seed():
-    User(username='exampleUser',email='example@email.com',password='easyLogin').save()
+    User(username='example',email='example@example.com',password='example').save()
 
 class Exercise(Model):
     name = CharField()
@@ -76,10 +76,6 @@ class ExerciseTags(Model):
 def add_exercise_tags_seed():
     for t in exercise_tags:
         ExerciseTags(exercise=t[0], tag=t[1]).save()
-
-# def add_list_seed(seed_model,seed_list,model_field):
-#     for i in seed_list:
-#         seed_model(model_field=i).save()
 
 class Emotion(Model):
     emotion = CharField()
