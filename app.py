@@ -7,6 +7,7 @@ from resources.users import users
 from resources.userexercises import userexercises
 from resources.inputforms import inputforms
 from resources.inputformstest import inputformstest
+from resources.emotion import emotion
 import models
 from flask_cors import CORS
 from flask_login import LoginManager
@@ -14,8 +15,8 @@ import os
 from dotenv import load_dotenv
 from resources.filelist import string_model_list
 
-model_list = [users,exercises,inputforms, inputformstest,userexercises
-# ,tag,exercisetags,emotion,thought,behavior,emotiontags,thoughttags,behaviortags,inputform,inputformemotions,inputformthoughts,inputformbehaviors
+model_list = [users,exercises,inputforms, inputformstest,userexercises, emotion
+# ,tag,exercisetags,thought,behavior,emotiontags,thoughttags,behaviortags,inputform,inputformemotions,inputformthoughts,inputformbehaviors
 ]
 
 #--------------------------------------------
@@ -76,6 +77,7 @@ app.register_blueprint(users, url_prefix='/api/v1/users')
 app.register_blueprint(userexercises, url_prefix='/api/v1/userexercises')
 app.register_blueprint(inputforms, url_prefix='/api/v1/inputforms')
 app.register_blueprint(inputformstest, url_prefix='/api/v1/inputformstest')
+app.register_blueprint(emotion, url_prefix='/api/v1/emotion')
 
 #--------------------------------------------
 # CREATE TABLES AND RUN APP
