@@ -83,12 +83,13 @@ def add_exercise_tags_seed():
 
 class Emotion(Model):
     emotion = CharField()
+    status = BooleanField()
     created_at: DateTimeField(default=datetime.datetime.now)
     class Meta:
         database = DATABASE
 def add_emotion_seed():
     for i in emotions:
-        Emotion(emotion=i).save()
+        Emotion(emotion=i, status=False).save()
 class EmotionTags(Model):
     emotion = ForeignKeyField(Emotion)
     tag = ForeignKeyField(Tag)
