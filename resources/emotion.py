@@ -12,7 +12,7 @@ from flask_login import current_user#, login_required
 emotion = Blueprint('emotion', 'emotion')
 
 #--------------------------------------------
-# GET EXERCISES
+# GET EMOTIONS
 #--------------------------------------------
 @emotion.route('/', methods=['GET'])
 def emotion_index():
@@ -25,7 +25,7 @@ def emotion_index():
     }), 200
 
 #--------------------------------------------
-# CREATE EXERCISE
+# CREATE EMOTION
 #--------------------------------------------
 @emotion.route('/', methods=['POST'])
 # @login_required
@@ -40,7 +40,7 @@ def create_emotion():
     ), 201
 
 #--------------------------------------------
-# SHOW EXERCISE
+# SHOW EMOTION
 #--------------------------------------------
 @emotion.route('/<id>', methods=["GET"])
 def get_one_emotion(id):
@@ -52,7 +52,7 @@ def get_one_emotion(id):
     ), 200
 
 #--------------------------------------------
-# UPDATE EXERCISE
+# UPDATE EMOTION
 #--------------------------------------------
 @emotion.route('/<id>', methods=["PUT"])
 def update_emotion(id):
@@ -65,7 +65,7 @@ def update_emotion(id):
     ), 200
 
 #--------------------------------------------
-# DELETE EXERCISE
+# DELETE EMOTION
 #--------------------------------------------
 @emotion.route('/<id>', methods=["DELETE"])
 def delete_emotion(id):

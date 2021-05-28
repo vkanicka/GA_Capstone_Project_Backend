@@ -66,6 +66,7 @@ CORS(users, origins=['http://localhost:3000'], supports_credentials=True)
 CORS(userexercises, origins=['http://localhost:3000'], supports_credentials=True)
 CORS(inputforms, origins=['http://localhost:3000'], supports_credentials=True)
 CORS(inputformstest, origins=['http://localhost:3000'], supports_credentials=True)
+CORS(emotion, origins=['http://localhost:3000'], supports_credentials=True)
 
 # for model in model_list:
 #     CORS(model, origins=['http://localhost:3000'], supports_credentials=True)
