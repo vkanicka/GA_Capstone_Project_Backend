@@ -8,6 +8,8 @@ from resources.userexercises import userexercises
 from resources.inputforms import inputforms
 from resources.inputformstest import inputformstest
 from resources.emotion import emotion
+from resources.thought import thought
+from resources.behavior import behavior
 import models
 from flask_cors import CORS
 from flask_login import LoginManager
@@ -15,7 +17,7 @@ import os
 from dotenv import load_dotenv
 from resources.filelist import string_model_list
 
-model_list = [users,exercises,inputforms, inputformstest,userexercises, emotion
+model_list = [users,exercises,inputforms, inputformstest,userexercises, emotion, thought
 # ,tag,exercisetags,thought,behavior,emotiontags,thoughttags,behaviortags,inputform,inputformemotions,inputformthoughts,inputformbehaviors
 ]
 
@@ -67,6 +69,8 @@ CORS(userexercises, origins=['http://localhost:3000'], supports_credentials=True
 CORS(inputforms, origins=['http://localhost:3000'], supports_credentials=True)
 CORS(inputformstest, origins=['http://localhost:3000'], supports_credentials=True)
 CORS(emotion, origins=['http://localhost:3000'], supports_credentials=True)
+CORS(thought, origins=['http://localhost:3000'], supports_credentials=True)
+CORS(behavior, origins=['http://localhost:3000'], supports_credentials=True)
 
 # for model in model_list:
 #     CORS(model, origins=['http://localhost:3000'], supports_credentials=True)
@@ -79,6 +83,9 @@ app.register_blueprint(userexercises, url_prefix='/api/v1/userexercises')
 app.register_blueprint(inputforms, url_prefix='/api/v1/inputforms')
 app.register_blueprint(inputformstest, url_prefix='/api/v1/inputformstest')
 app.register_blueprint(emotion, url_prefix='/api/v1/emotion')
+app.register_blueprint(thought, url_prefix='/api/v1/thought')
+app.register_blueprint(behavior, url_prefix='/api/v1/behavior')
+
 
 #--------------------------------------------
 # CREATE TABLES AND RUN APP
