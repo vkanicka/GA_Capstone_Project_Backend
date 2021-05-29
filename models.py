@@ -46,6 +46,16 @@ def add_exercise_seed():
     for exercise in exercises:
         Exercise(name=exercise[0], description=exercise[1]).save()
 
+class SuggestedExercise(Model):
+    name = CharField()
+    description=CharField()
+    created_at: DateTimeField(default=datetime.datetime.now)
+    class Meta:
+        database = DATABASE
+def add_exercise_seed():
+    for exercise in exercises:
+        Exercise(name=exercise[0], description=exercise[1]).save()
+
 class UserExercise(Model):
     user= ForeignKeyField(User, backref="this_users_exercises")
     exercise = ForeignKeyField(Exercise)
@@ -132,41 +142,7 @@ def add_behavior_tags():
     for i in behavior_tags:
         BehaviorTags(behavior_id=i[0],tag_id=i[1]).save()
 
-class InputForm(Model):
-    user= ForeignKeyField(User, backref="this_users_input_forms")
-    Happy = BooleanField()
-    Sad  = BooleanField()
-    Angry  = BooleanField()
-    Stressed  = BooleanField()
-    Overwhelmed = BooleanField()
-    created_at: DateTimeField(default=datetime.datetime.now)
-    class Meta:
-        database = DATABASE
-class InputFormTest(Model):
-    user= ForeignKeyField(User, backref="this_users_input_forms")
-    test='test'
-    form_datetime=DateTimeField(default=datetime.datetime.now)
-    created_at: DateTimeField(default=datetime.datetime.now)
-    class Meta:
-        database = DATABASE
-class InputFormEmotions(Model):
-    form = ForeignKeyField(InputForm)
-    emotion = ForeignKeyField(Emotion)
-    created_at: DateTimeField(default=datetime.datetime.now)
-    class Meta:
-        database = DATABASE
-class InputFormThoughts(Model):
-    form = ForeignKeyField(InputForm)
-    emotion = ForeignKeyField(Thought)
-    created_at: DateTimeField(default=datetime.datetime.now)
-    class Meta:
-        database = DATABASE
-class InputFormBehaviors(Model):
-    form = ForeignKeyField(InputForm)
-    emotion = ForeignKeyField(Behavior)
-    created_at: DateTimeField(default=datetime.datetime.now)
-    class Meta:
-        database = DATABASE
+
 
 #--------------------------------------------
 # ADD SEEDS
@@ -188,7 +164,7 @@ def add_seeds():
 #--------------------------------------------
 def initialize():
     DATABASE.connect()
-    tables = [User, Exercise, UserExercise, Tag, ExerciseTags, Emotion, Thought, Behavior, EmotionTags, ThoughtTags, BehaviorTags, InputForm, InputFormEmotions, InputFormThoughts, InputFormBehaviors, InputFormTest]
+    tables = [User, Exercise, SuggestedExercise, UserExercise, Tag, ExerciseTags, Emotion, Thought, Behavior, EmotionTags, ThoughtTags, BehaviorTags]
     for table in tables:
         DATABASE.drop_tables([table], safe=True)
         DATABASE.create_tables([table], safe=True)
