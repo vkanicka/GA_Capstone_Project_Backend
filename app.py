@@ -3,10 +3,9 @@
 #--------------------------------------------
 from flask import Flask, g, jsonify
 from resources.exercises import exercises
+from resources.suggestedexercises import suggestedexercises
 from resources.users import users
 from resources.userexercises import userexercises
-from resources.inputforms import inputforms
-from resources.inputformstest import inputformstest
 from resources.emotion import emotion
 from resources.thought import thought
 from resources.behavior import behavior
@@ -17,7 +16,7 @@ import os
 from dotenv import load_dotenv
 from resources.filelist import string_model_list
 
-model_list = [users,exercises,inputforms, inputformstest,userexercises, emotion, thought
+model_list = [users,exercises, userexercises, emotion, thought
 # ,tag,exercisetags,thought,behavior,emotiontags,thoughttags,behaviortags,inputform,inputformemotions,inputformthoughts,inputformbehaviors
 ]
 
@@ -64,10 +63,11 @@ def load_user(user_id):
 CORS(exercises, origins=['http://localhost:3000']
  #, supports_credentials=True
 )
+CORS(suggestedexercises, origins=['http://localhost:3000']
+ #, supports_credentials=True
+)
 CORS(users, origins=['http://localhost:3000'], supports_credentials=True)
 CORS(userexercises, origins=['http://localhost:3000'], supports_credentials=True)
-CORS(inputforms, origins=['http://localhost:3000'], supports_credentials=True)
-CORS(inputformstest, origins=['http://localhost:3000'], supports_credentials=True)
 CORS(emotion, origins=['http://localhost:3000'], supports_credentials=True)
 CORS(thought, origins=['http://localhost:3000'], supports_credentials=True)
 CORS(behavior, origins=['http://localhost:3000'], supports_credentials=True)
@@ -78,10 +78,9 @@ CORS(behavior, origins=['http://localhost:3000'], supports_credentials=True)
 # REGISTER BLUEPRINTS
 #--------------------------------------------
 app.register_blueprint(exercises, url_prefix='/api/v1/exercises')
+app.register_blueprint(suggestedexercises, url_prefix='/api/v1/suggestedexercises')
 app.register_blueprint(users, url_prefix='/api/v1/users')
 app.register_blueprint(userexercises, url_prefix='/api/v1/userexercises')
-app.register_blueprint(inputforms, url_prefix='/api/v1/inputforms')
-app.register_blueprint(inputformstest, url_prefix='/api/v1/inputformstest')
 app.register_blueprint(emotion, url_prefix='/api/v1/emotion')
 app.register_blueprint(thought, url_prefix='/api/v1/thought')
 app.register_blueprint(behavior, url_prefix='/api/v1/behavior')

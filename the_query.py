@@ -1,4 +1,9 @@
-SELECT EXERCISE.NAME FROM (
+import sqlite3
+con = sqlite3.connect('capstone.sqlite')
+cur = con.cursor()
+
+emotions = cur.execute('''
+SELECT EXERCISE.NAME, EXERCISE.DESCRIPTION FROM (
 
   SELECT ID AS TAG_ID, TAG, SUM(COUNT) AS TOTAL FROM
   (
@@ -35,3 +40,8 @@ SELECT EXERCISE.NAME FROM (
 LEFT JOIN exercisetags ON exercisetags.tag_id = FOUND_TAG.tag_id
 LEFT JOIN exercise ON exercise.id = exercisetags.exercise_id
 ;
+''')
+
+print(emotions.fetchall())
+
+con.close()
