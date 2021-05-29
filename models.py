@@ -97,12 +97,13 @@ def add_emotion_tags_seed():
         EmotionTags(emotion=i[0],tag=i[1]).save()
 class Thought(Model):
     thought = CharField()
+    status = BooleanField()
     created_at: DateTimeField(default=datetime.datetime.now)
     class Meta:
         database = DATABASE
 def add_thought_seed():
     for i in thoughts:
-        Thought(thought=i).save()
+        Thought(thought=i, status=False).save()
 class ThoughtTags(Model):
     thought = ForeignKeyField(Thought)
     tag = ForeignKeyField(Tag)
@@ -114,12 +115,13 @@ def add_thought_tags():
         ThoughtTags(thought=t[0], tag=t[1]).save()
 class Behavior(Model):
     behavior = CharField()
+    status = BooleanField()
     created_at: DateTimeField(default=datetime.datetime.now)
     class Meta:
         database = DATABASE
 def add_behavior_seed():
     for i in behaviors:
-        Behavior(behavior=i).save()
+        Behavior(behavior=i, status=False).save()
 class BehaviorTags(Model):
     behavior = ForeignKeyField(Behavior)
     tag = ForeignKeyField(Tag)
