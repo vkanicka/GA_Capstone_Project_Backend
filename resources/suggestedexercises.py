@@ -5,6 +5,7 @@ import models
 from flask import Blueprint, request, jsonify
 from playhouse.shortcuts import model_to_dict
 from flask_login import current_user#, login_required
+from the_query import suggested_exercise_query_result
 
 #--------------------------------------------
 # CREATE BLUEPRINT
@@ -30,8 +31,10 @@ def suggestedexercises_index():
 @suggestedexercises.route('/', methods=['POST'])
 # @login_required
 def create_suggestedexercise():
-    payload = request.get_json()
-    new_suggestedexercise = models.SuggestedExercise.create(**payload)
+    payload = suggested_exercise_query_result
+    print(suggested_exercise_query_result)
+    print(type(suggested_exercise_query_result))
+    new_suggestedexercise = models.SuggestedExercise.create(name=payload[0], description=payload[1])
     suggestedexercise_dict = model_to_dict(new_suggestedexercise)
     return jsonify(
         data=suggestedexercise_dict,
