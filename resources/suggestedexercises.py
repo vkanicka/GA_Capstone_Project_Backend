@@ -30,6 +30,8 @@ def suggestedexercises_index():
 @suggestedexercises.route('/', methods=['POST'])
 # @login_required
 def create_suggestedexercise():
+    from the_query import clearSuggestedExerciseTable
+    clearSuggestedExerciseTable()
     from the_query import suggestExercise
     payload = suggestExercise()
     new_suggestedexercise = models.SuggestedExercise.create(name=payload[0], description=payload[1])

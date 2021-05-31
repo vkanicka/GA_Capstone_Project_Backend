@@ -1,7 +1,21 @@
+def clearSuggestedExerciseTable():
+    import sqlite3
+    con = sqlite3.connect('capstone.sqlite')
+    cur = con.cursor()
+    cur.execute('''DELETE FROM suggestedexercise''')
+    con.commit()
+    con.close()
+
 def suggestExercise():
     import sqlite3
     con = sqlite3.connect('capstone.sqlite')
     cur = con.cursor()
+
+    # for development:
+    cur.execute('''
+    DELETE FROM suggestedexercise;''')
+    # for production:
+    # truncate postgres, drop and create peewee
 
     suggested_exercise_query_result = cur.execute('''
     SELECT EXERCISE.NAME, EXERCISE.DESCRIPTION FROM (
