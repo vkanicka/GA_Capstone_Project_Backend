@@ -6,5 +6,6 @@ thoughts = [
 "I wish I didn't feel this way",
 "I should be more productive",
 "My thoughts are racing",
-"I am too (negative adjective)"
+"I am too (negative adjective)",
+"No one cares"
 ]
