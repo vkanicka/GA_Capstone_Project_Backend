@@ -1,5 +1,4 @@
-tags = [
-'Time Management',
+tags = ['Time Management',
 'Stress',
 'Self-Compassion',
 'Conflict',

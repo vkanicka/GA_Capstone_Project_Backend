@@ -4,5 +4,9 @@ emotions = [
 'Angry',
 'Stressed',
 'Overwhelmed',
-'Annoyed'
+'Annoyed',
+'Depressed',
+'Ashamed',
+'Inadequate',
+'Critical'
 ]
