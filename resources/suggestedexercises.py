@@ -34,7 +34,7 @@ def create_suggestedexercise():
     clearSuggestedExerciseTable()
     from the_query import suggestExercise
     payload = suggestExercise()
-    new_suggestedexercise = models.SuggestedExercise.create(name=payload[0], description=payload[1])
+    new_suggestedexercise = models.SuggestedExercise.create(exercise = payload[0])
     suggestedexercise_dict = model_to_dict(new_suggestedexercise)
     return jsonify(
         data=suggestedexercise_dict,

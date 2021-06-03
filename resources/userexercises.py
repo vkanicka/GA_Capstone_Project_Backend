@@ -29,25 +29,50 @@ def userexercises_index():
 #--------------------------------------------
 # ADD EXERCISE TO USER
 #--------------------------------------------
-@userexercises.route('/add/<exercise_id>', methods=['POST'])
-def add(exercise_id):
+@userexercises.route('/', methods=['POST'])
+def addUserExercise():
 # GET INPUT
     payload = request.get_json()
-    # MAY WANT TO ADD IF USEREXERCISE DOES NOT ALREADY EXIST, CREATE, ELSE RETURN ERROR MESSAGE
-    new_exercise = models.UserExercise.create(
-    user= current_user.id,
-    exercise = exercise_id,
-    completed = payload['completed'],
-    completed_count = payload['completed_count'],
-    favorite = payload['favorite'],
-    recommended = payload['recommended']
-    )
-    user_exercise_dict = model_to_dict(new_exercise)
-    return jsonify(
-        data=user_exercise_dict,
-        message='Successfully added exercise to user!',
-        status=201
-    ), 201
+    print(payload)
+
+    try:
+        models.UserExercise.get(models.UserExercise.exercise == payload["exercise"])
+
+        return jsonify(
+            data={},
+            message=f"Exercise {payload['exercise']} has already been added.",
+            status=401
+        ), 401
+    except models.DoesNotExist:
+        new_exercise = models.UserExercise.create(
+            user= current_user.id,
+            exercise = payload['exercise'],
+            completed = payload['completed'],
+            completed_count = payload['completed_count'],
+            favorite = payload['favorite'],
+            recommended = payload['recommended']
+        )
+        user_exercise_dict = model_to_dict(new_exercise)
+        return jsonify(
+            data=user_exercise_dict,
+            message='Successfully added exercise to user!',
+            status=201
+        ), 201
+
+#--------------------------------------------
+# CHECK IF USER EXERCISE EXISTS
+#--------------------------------------------
+@userexercises.route('/exists', methods=['POST'])
+def checkThis():
+# GET INPUT
+    payload = request.get_json()
+    print(payload)
+    # try:
+    #     models.UserExercise.get(models.UserExercise.exercise == payload["exercise"])
+    #     return "exists"
+    # except models.DoesNotExist:
+    #     return "does not exist"
+
 
 #--------------------------------------------
 # SHOW USER EXERCISE
