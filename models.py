@@ -47,8 +47,9 @@ def add_exercise_seed():
         Exercise(name=exercise[0], description=exercise[1]).save()
 
 class SuggestedExercise(Model):
-    name = CharField()
-    description=CharField()
+    # name = CharField()
+    # description=CharField()
+    exercise= ForeignKeyField(Exercise)
     created_at: DateTimeField(default=datetime.datetime.now)
     class Meta:
         database = DATABASE

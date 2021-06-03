@@ -18,7 +18,7 @@ def suggestExercise():
     # truncate postgres, drop and create peewee
 
     suggested_exercise_query_result = cur.execute('''
-    SELECT EXERCISE.NAME, EXERCISE.DESCRIPTION FROM (
+    SELECT EXERCISE.ID, EXERCISE.NAME, EXERCISE.DESCRIPTION FROM (
       SELECT ID AS TAG_ID, TAG, SUM(COUNT) AS TOTAL FROM
       (
         SELECT tag.id AS ID, tag.tag AS TAG, COUNT(emotion.emotion) AS COUNT
@@ -51,7 +51,6 @@ def suggestExercise():
     ''').fetchone()
 
     con.close()
-
     return suggested_exercise_query_result
 
 print(suggestExercise())
