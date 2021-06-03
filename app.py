@@ -56,7 +56,7 @@ model_list=[exercises, suggestedexercises, users, userexercises, emotion, though
 for model in model_list:
     CORS(model, origins=['http://localhost:3000'], supports_credentials=True)
 for model in model_list:
-    CORS(model, origins=['https://mental-health-trainer.herokuapp.com'], supports_credentials=True)
+    CORS(model, origins=['http://mental-health-trainer.herokuapp.com'], supports_credentials=True)
 
 #--------------------------------------------
 # REGISTER BLUEPRINTS
