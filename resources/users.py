@@ -28,7 +28,7 @@ def users_index():
 #--------------------------------------------
 # REGISTER USER
 #--------------------------------------------
-@users.route('/register/', methods=['POST'])
+@users.route('/register', methods=['POST'])
 def register():
 # GET INPUT
     payload = request.get_json()
