@@ -1,6 +1,8 @@
 #--------------------------------------------
 # IMPORTS
 #--------------------------------------------
+import os
+from playhouse.db_url import connect
 from peewee import *
 import datetime
 from flask_login import UserMixin
@@ -17,13 +19,14 @@ from resources.seeds.behavior_tags import behavior_tags
 #--------------------------------------------
 # DATABASE ENVIRONMENT
 #--------------------------------------------
-def select_database(environment):
-    if environment == 'development':
-        return SqliteDatabase('capstone.sqlite')
-    if environment == 'production':
-        return PostgresqlDatabase('capstone', user='postgres')
-DATABASE = select_database('development')
-
+# def select_database(environment):
+#     if environment == 'development':
+#         return SqliteDatabase('capstone.sqlite')
+#     if environment == 'production':
+#         return PostgresqlDatabase('capstone', user='postgres')
+# DATABASE = select_database('development')
+DATABASE = connect(os.environ.get('DATABASE_URL') or 'sqlite:///capstone.sqlite')
+#DATABASE_URL will exist on heroku
 #--------------------------------------------
 # CREATE MODELS
 #--------------------------------------------
