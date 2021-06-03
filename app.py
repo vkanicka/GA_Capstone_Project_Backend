@@ -57,19 +57,18 @@ for model in model_list:
     CORS(model, origins=['http://localhost:3000'], supports_credentials=True)
 for model in model_list:
     CORS(model, origins=['https://mental-health-trainer.herokuapp.com'], supports_credentials=True)
-    CORS(model, origins=['https://mental-health-trainer.herokuapp.com/api/v1'], supports_credentials=True)
 
 #--------------------------------------------
 # REGISTER BLUEPRINTS
 #--------------------------------------------
-app.register_blueprint(exercises, url_prefix='/api/v1/exercises')
-app.register_blueprint(suggestedexercises, url_prefix='/api/v1/suggestedexercises')
-app.register_blueprint(users, url_prefix='/api/v1/users')
-app.register_blueprint(userexercises, url_prefix='/api/v1/userexercises')
-app.register_blueprint(emotion, url_prefix='/api/v1/emotion')
-app.register_blueprint(thought, url_prefix='/api/v1/thought')
-app.register_blueprint(behavior, url_prefix='/api/v1/behavior')
-app.register_blueprint(reset, url_prefix='/api/v1/reset')
+app.register_blueprint(exercises, url_prefix='/exercises')
+app.register_blueprint(suggestedexercises, url_prefix='/suggestedexercises')
+app.register_blueprint(users, url_prefix='/users')
+app.register_blueprint(userexercises, url_prefix='/userexercises')
+app.register_blueprint(emotion, url_prefix='/emotion')
+app.register_blueprint(thought, url_prefix='/thought')
+app.register_blueprint(behavior, url_prefix='/behavior')
+app.register_blueprint(reset, url_prefix='/reset')
 
 #--------------------------------------------
 # DEFERRED CALLBACKS
