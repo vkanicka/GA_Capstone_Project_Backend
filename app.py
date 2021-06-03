@@ -57,6 +57,7 @@ for model in model_list:
     CORS(model, origins=['http://localhost:3000'], supports_credentials=True)
 for model in model_list:
     CORS(model, origins=['https://mental-health-trainer.herokuapp.com'], supports_credentials=True)
+    CORS(model, origins=['https://mental-health-trainer.herokuapp.com/api/v1'], supports_credentials=True)
 
 #--------------------------------------------
 # REGISTER BLUEPRINTS
