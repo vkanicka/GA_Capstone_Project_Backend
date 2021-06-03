@@ -54,9 +54,9 @@ def load_user(user_id):
 model_list=[exercises, suggestedexercises, users, userexercises, emotion, thought, behavior, reset]
 
 for model in model_list:
-    CORS(model, origins=['http://localhost:3000'], supports_credentials=True)
+    CORS(model, origins=['https://localhost:3000'], supports_credentials=True)
 for model in model_list:
-    CORS(model, origins=['http://mental-health-trainer.herokuapp.com'], supports_credentials=True)
+    CORS(model, origins=['https://mental-health-trainer.herokuapp.com'], supports_credentials=True)
 
 #--------------------------------------------
 # REGISTER BLUEPRINTS
