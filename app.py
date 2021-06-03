@@ -1,7 +1,7 @@
 #--------------------------------------------
 # IMPORTS
 #--------------------------------------------
-from flask import Flask, g, jsonify
+from flask import Flask, jsonify, after_this_request #, g
 from resources.exercises import exercises
 from resources.suggestedexercises import suggestedexercises
 from resources.users import users
@@ -17,10 +17,6 @@ import os
 from dotenv import load_dotenv
 from resources.filelist import string_model_list
 
-model_list = [users,exercises, userexercises, emotion, thought
-# ,tag,exercisetags,thought,behavior,emotiontags,thoughttags,behaviortags,inputform,inputformemotions,inputformthoughts,inputformbehaviors
-]
-
 #--------------------------------------------
 # CONSTANT VARIABLES / ENV
 #--------------------------------------------
@@ -32,21 +28,6 @@ PORT=8000
 # CREATE app
 #--------------------------------------------
 app = Flask(__name__)
-
-#--------------------------------------------
-# DATABASE COMMUNICATION
-#--------------------------------------------
-@app.before_request
-def before_request():
-    """Connect to the database before each request."""
-    g.db = models.DATABASE
-    g.db.connect()
-
-@app.after_request
-def after_request(response):
-    """Close the database connection after each request."""
-    g.db.close()
-    return response
 
 #--------------------------------------------
 # LOGIN MANAGER CONFIGURATION
@@ -61,12 +42,8 @@ def load_user(user_id):
 #--------------------------------------------
 # CORS
 #--------------------------------------------
-CORS(exercises, origins=['http://localhost:3000']
- #, supports_credentials=True
-)
-CORS(suggestedexercises, origins=['http://localhost:3000']
- #, supports_credentials=True
-)
+CORS(exercises, origins=['http://localhost:3000'], supports_credentials=True)
+CORS(suggestedexercises, origins=['http://localhost:3000'], supports_credentials=True)
 CORS(users, origins=['http://localhost:3000'], supports_credentials=True)
 CORS(userexercises, origins=['http://localhost:3000'], supports_credentials=True)
 CORS(emotion, origins=['http://localhost:3000'], supports_credentials=True)
@@ -74,8 +51,6 @@ CORS(thought, origins=['http://localhost:3000'], supports_credentials=True)
 CORS(behavior, origins=['http://localhost:3000'], supports_credentials=True)
 CORS(reset, origins=['http://localhost:3000'], supports_credentials=True)
 
-# for model in model_list:
-#     CORS(model, origins=['http://localhost:3000'], supports_credentials=True)
 #--------------------------------------------
 # REGISTER BLUEPRINTS
 #--------------------------------------------
@@ -88,10 +63,31 @@ app.register_blueprint(thought, url_prefix='/api/v1/thought')
 app.register_blueprint(behavior, url_prefix='/api/v1/behavior')
 app.register_blueprint(reset, url_prefix='/api/v1/reset')
 
+#--------------------------------------------
+# DEFERRED CALLBACKS
+#--------------------------------------------
+@app.before_request
+def before_request():
+    """Connect to the db before each request"""
+    print("before_request")
+    models.DATABASE.connect()
+
+@app.after_request
+def after_request(response):
+    """Close the db connetion after each request"""
+    print("after_request")
+    models.DATABASE.close()
+    return response
 
 #--------------------------------------------
-# CREATE TABLES AND RUN APP
+# INTIALIZE DATABASE TABLES
 #--------------------------------------------
+# DEVELOPMENT
 if __name__ == '__main__':
     models.initialize()
     app.run(debug=DEBUG, port=PORT)
+
+# PRODUCTION:
+if os.environ.get('FLASK_ENV') != 'development':
+  print('\non heroku!')
+  models.initialize()
