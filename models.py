@@ -152,7 +152,7 @@ def add_behavior_tags():
 # ADD SEEDS
 #--------------------------------------------
 def add_seeds():
-    add_user_seed()
+    # add_user_seed()
     add_exercise_seed()
     add_tag_seed()
     add_emotion_seed()
