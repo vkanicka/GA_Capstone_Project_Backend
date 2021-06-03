@@ -2,6 +2,7 @@
 # DEPENDENCIES
 #--------------------------------------------
 import models
+from peewee import *
 from flask import Blueprint, request, jsonify
 from flask_bcrypt import generate_password_hash, check_password_hash
 from playhouse.shortcuts import model_to_dict
@@ -33,46 +34,31 @@ def userexercises_index():
 def addUserExercise():
 # GET INPUT
     payload = request.get_json()
-    print(payload)
 
-    try:
-        models.UserExercise.get(models.UserExercise.exercise == payload["exercise"])
-
-        return jsonify(
-            data={},
-            message=f"Exercise {payload['exercise']} has already been added.",
-            status=401
-        ), 401
-    except models.DoesNotExist:
-        new_exercise = models.UserExercise.create(
-            user= current_user.id,
-            exercise = payload['exercise'],
-            completed = payload['completed'],
-            completed_count = payload['completed_count'],
-            favorite = payload['favorite'],
-            recommended = payload['recommended']
-        )
-        user_exercise_dict = model_to_dict(new_exercise)
+    user_exercise, created = models.UserExercise.get_or_create(
+        exercise=payload["exercise"],
+        user=current_user.id,
+        defaults={
+            "exercise" : payload['exercise'],
+            "completed" : payload['completed'],
+            "completed_count" : payload['completed_count'],
+            "favorite" : payload['favorite'],
+            "recommended" : payload['recommended']
+        }
+    )
+    user_exercise_dict = model_to_dict(user_exercise)
+    if (created):
         return jsonify(
             data=user_exercise_dict,
-            message='Successfully added exercise to user!',
+            message='User exercise was added!',
             status=201
         ), 201
-
-#--------------------------------------------
-# CHECK IF USER EXERCISE EXISTS
-#--------------------------------------------
-@userexercises.route('/exists', methods=['POST'])
-def checkThis():
-# GET INPUT
-    payload = request.get_json()
-    print(payload)
-    # try:
-    #     models.UserExercise.get(models.UserExercise.exercise == payload["exercise"])
-    #     return "exists"
-    # except models.DoesNotExist:
-    #     return "does not exist"
-
+    else:
+        return jsonify(
+            data=user_exercise_dict,
+            message="User already existed",
+            status=200
+        )
 
 #--------------------------------------------
 # SHOW USER EXERCISE
