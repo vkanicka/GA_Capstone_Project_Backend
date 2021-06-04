@@ -170,7 +170,7 @@ def initialize():
     DATABASE.connect()
     tables = [User, Exercise, SuggestedExercise, UserExercise, Tag, ExerciseTags, Emotion, Thought, Behavior, EmotionTags, ThoughtTags, BehaviorTags]
     for table in tables:
-        table.truncate_table(restart_identity=True, cascade=True) # this
+        table.truncate_table(cascade=True) # this
         # table.create_table(safe=True)
     # for table in tables:
     #     table.create_table(safe=True)
