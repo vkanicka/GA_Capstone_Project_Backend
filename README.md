@@ -1,7 +1,12 @@
 # GA_Capstone_Project_Backend
 
 #### Link to Hosted Working App
- - [ ] tbd 
+https://my-mental-health-trainer.herokuapp.com/ 
+
+Front End Repository:
+https://github.com/vkanicka/GA_Capstone_Project_FrontEnd
+Back End Repository:
+https://github.com/vkanicka/GA_Capstone_Project_Backend
 
 #### Description 
 An app that matches a user's current thoughts, feelings and behaviors with mental health exercises specific to their needs.
@@ -17,10 +22,9 @@ Users of this app understand the importance of mental health, but want a more in
 
 ## User Stories (MVP)
  - [x] Users can create an account and login
- - [ ] Users can communicate how they’re doing to the app via a selection of inputs that may include emojis, sliders and clickable buttons for emotions, thoughts and behaviors
+ - [x] Users can communicate how they’re doing to the app via a selection of inputs that may include emojis, sliders and clickable buttons for emotions, thoughts and behaviors
  - [x] Exercises will have tags to help user and app search for appropriate exercises
- - [ ] User will receive mirroring response from app (Ex. “It sounds like you may be feeling ______, is that right?)
- - [ ] Users can receive suggestion(s) on what exercises to complete within the app based on their daily input
+ - [x] Users can receive suggestion(s) on what exercise to complete within the app based on their input
 
 ## Stretch Features
  - [ ] App may ask user follow up questions to better estimate most helpful path for user
@@ -31,11 +35,15 @@ Users of this app understand the importance of mental health, but want a more in
  - [ ] App will track and visualize user’s progress in building various skills
  - [ ] User has a dashboard where certain features are posted (ex. Focus: next right thing, to do list prioritized)
  - [ ] If user is feeling great and app cannot determine a specific time sensitive focus area, app will let user decide which exercise to complete
-
+ - [ ] User will receive mirroring response from app (Ex. “It sounds like you may be feeling ______, is that right?)
+ 
 ## Wireframes
- - [ ] Option 1: Just input, feedback and suggested exercise
+ - [x] Option 1: Just input, feedback and suggested exercise
  - [ ] Option 2: Dashboard with widgets and progress tracking
  - [ ] Option 3: Avatar personalization
+
+![image](https://user-images.githubusercontent.com/37551471/120780538-d84ab500-c4ed-11eb-8a4b-1696cabbf30d.png)
+
 
 ## Data Models
  - [x] Exercise
@@ -88,8 +96,6 @@ Key | Exercise ID | Tag ID
 4 | 1 | 2
 5 | 4 | 4
 6 | 4 | 5
-
-**Considering Adding Tag to ETB tables, but maybe not since one ETB can have many tags**
 
 Emotions
 Key | Feeling
@@ -161,55 +167,6 @@ Key | Behavior ID | Tag ID
 5 | 5 | 6
 5 | 5 | 8
 
-Exercise Length?
-Key | Count | Type
------------- | ------------- | -------------
-1 | 1 | minute(s)
-2 | 3 | minute(s)
-3 | 5 | minute(s)
-4 | 10 | minute(s)
-5 | 1 | time(s)
-6 | 3 | time(s)
-7 | 5 | time(s)
-8 | 10 | time(s)
-
-Input Form List
-Key | User | DateTime
------------- | ------------- | -------------
-1 | 1 | 1:02pm 3/21/2021
-2 | 1 | 12:20pm 3/22/2021
-3 | 2 | 9:09pm 3/23/2021
-
-Input Form Details
-Key | Form ID | Type | Name/ID
------------- | ------------- | -------------  | -------------
-1 | 1 | Emotion | Stressed
-2 | 1 | Emotion | Overwhelmed
-3 | 1 | Thought | I don't know how I will start...
-4 | 1 | Behavior | Prograstinating
-
-OR below 3 tables:
-
-Input Form Emotions
-Key | Form ID | Emotion
------------- | ------------- | -------------
-1 | 1 | 4 - Stressed
-2 | 1 | 5 - Overwhelmed
-3 | 2 | 6 - Annoyed
-
-Input Form Thoughts
-Key | Form ID | Thoughts
------------- | ------------- | -------------
-1 | 1 | 1
-2 | 1 | 2
-3 | 2 | 5
-
-Input Form Behaviors
-Key | Form ID | Behaviors
------------- | ------------- | -------------
-1 | 1 | 1
-2 | 1 | 2
-3 | 2 | 3
 
 ## Unsolved Problems and Future Features
  - [ ] tbd
