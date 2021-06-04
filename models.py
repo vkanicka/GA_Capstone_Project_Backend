@@ -174,8 +174,8 @@ def initialize():
         # DATABASE.table.drop_table()
         # DATABASE.truncate_table([table])
         # DATABASE.create_tables([table], safe=True)
-        table.drop_table(restart_identity=True, cascade=True)
-        # table.truncate_table(restart_identity=True, cascade=True) # this works but duplicates once
+        # table.drop_table(restart_identity=True, cascade=True)
+        table.truncate_table(restart_identity=True, cascade=True, safe=True) # this works but duplicates once
         # table.create_table(safe=True)
     for table in tables:
         table.create_table(safe=True)
