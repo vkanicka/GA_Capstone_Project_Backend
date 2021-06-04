@@ -169,9 +169,10 @@ def add_seeds():
 def initialize():
     DATABASE.connect()
     tables = [User, Exercise, SuggestedExercise, UserExercise, Tag, ExerciseTags, Emotion, Thought, Behavior, EmotionTags, ThoughtTags, BehaviorTags]
-    # for table in tables:
-    #     table.drop_table(cascade=True)
-    #     table.create_table(safe=True)
-    # print("Initialized database and tables...")
-    # add_seeds()
+    for table in tables:
+        table.drop_table()
+        # table.drop_table(cascade=True)
+        table.create_table(safe=True)
+    print("Initialized database and tables...")
+    add_seeds()
     DATABASE.close()

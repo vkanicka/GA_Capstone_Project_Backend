@@ -38,6 +38,7 @@ def create_suggestedexercise():
     # from the_query import clearSuggestedExerciseTable
     # clearSuggestedExerciseTable()
     # from the_query import suggestExercise
+    models.SuggestedExercise.truncate_table()
 
 
     emotions = (models.Emotion
@@ -78,21 +79,16 @@ def create_suggestedexercise():
     emotions_df = pd.DataFrame(list(emotions.dicts()))
     thoughts_df = pd.DataFrame(list(thoughts.dicts()))
     behaviors_df = pd.DataFrame(list(behaviors.dicts()))
-    print(emotions_df)
-    print(thoughts_df)
-    print(behaviors_df)
 
 # COMBINE EBTs INTO ONE TABLE OF TAG COUNTS
     ebt_tag_count = pd.concat([emotions_df, thoughts_df, behaviors_df])
-    print('ebt_tag_count')
-    print(ebt_tag_count)
-    ebt_totals = ebt_tag_count.groupby('tag_id').sum()
-    print('ebt_totals')
-    print(ebt_totals)
+    ebt_totals = ebt_tag_count.groupby('tag_id').sum().reset_index()
+    found_tag = ebt_totals.sort_values(by='count', ascending=False)
+    found_tag = found_tag['tag_id'][0]
 
 # MAP TAGS (TAG IDS) TO EXERCISE TAGS WHERE TAGS IN DFs
     exercise_tags = models.Exercise.select(models.Exercise.id.alias("exercise_id")
-    , models.Exercise.name.alias("name")
+    , models.Exercise.name.alias("exercise_name")
     , models.ExerciseTags.tag_id.alias("exercise_tag_id")
     , models.Tag.tag.alias("tag")
     , models.Tag.id.alias("tag_id")
@@ -100,7 +96,11 @@ def create_suggestedexercise():
     on=models.Exercise.id==models.ExerciseTags.exercise_id).join(models.Tag, on=models.ExerciseTags.tag_id==models.Tag.id)
 
     exercise_tags_df = pd.DataFrame(list(exercise_tags.dicts()))
-    print(exercise_tags_df)
+
+    answer = int(exercise_tags_df.loc[exercise_tags_df['tag_id']==found_tag]['exercise_id'].values[0])
+    print(f"THE ANSWER IS {answer}")
+    print(type(answer))
+
 
     def queryPSQL():
         return models.Emotion.select(models.Emotion).where(models.Emotion.status==True).execute() # this returns the first emotion ID selected
@@ -109,11 +109,11 @@ def create_suggestedexercise():
 
     #
     # payload = suggestExercise()
-    new_suggestedexercise = models.SuggestedExercise.create(exercise = payload[0])
+    new_suggestedexercise = models.SuggestedExercise.create(exercise = answer)
     suggestedexercise_dict = model_to_dict(new_suggestedexercise)
     return jsonify(
         data=suggestedexercise_dict,
-        message='Successfully created suggestedexercise!',
+        message=f'Successfully created suggestedexercise {answer}!',
         status=201
     ), 201
 
