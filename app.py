@@ -99,9 +99,10 @@ def after_request(response):
 # INTIALIZE DATABASE TABLES
 #--------------------------------------------
 # DEVELOPMENT
-# if __name__ == '__main__':
-#     models.initialize()
-#     app.run(debug=DEBUG, port=PORT)
+if __name__ == '__main__':
+    print('development initialize')
+    models.initialize()
+    app.run(debug=DEBUG, port=PORT)
 
 # PRODUCTION:
 if os.environ.get('FLASK_ENV') != 'development':
