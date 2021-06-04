@@ -62,7 +62,7 @@ def load_user(user_id):
 model_list=[exercises, suggestedexercises, users, userexercises, emotion, thought, behavior, reset]
 
 for model in model_list:
-    CORS(model, origins=['http://localhost:3000', 'https://my-mental-health-trainer.herokuapp.com/'])
+    CORS(model, origins=['http://localhost:3000', 'https://my-mental-health-trainer.herokuapp.com'])
 
 # for model in model_list:
 #     CORS(model, origins=['https://mental-health-trainer.herokuapp.com'], supports_credentials=True)
