@@ -174,7 +174,8 @@ def initialize():
         # DATABASE.table.drop_table()
         # DATABASE.truncate_table([table])
         # DATABASE.create_tables([table], safe=True)
-        table.truncate_table(cascade=True)
+        table.drop_table(safe=True, cascade=True)
+        table.truncate_table(restart_identity=True, cascade=True) # this works but duplicates once
         table.create_table(safe=True)
     # DATABASE.create_tables([User, Exercise, SuggestedExercise, UserExercise, Tag, ExerciseTags, Emotion, Thought, Behavior, EmotionTags, ThoughtTags, BehaviorTags], safe=True)
     print("Initialized database and tables...")
