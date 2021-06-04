@@ -33,6 +33,7 @@ def userexercises_index():
 @userexercises.route('/', methods=['POST'])
 def addUserExercise():
 # GET INPUT
+
     payload = request.get_json()
 
     user_exercise, created = models.UserExercise.get_or_create(
