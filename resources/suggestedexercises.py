@@ -7,6 +7,9 @@ from playhouse.shortcuts import model_to_dict
 from flask_login import current_user#, login_required
 import os
 from playhouse.db_url import connect
+import pandas as pd
+from peewee import *
+from peewee import fn
 
 #--------------------------------------------
 # CREATE BLUEPRINT
@@ -39,53 +42,71 @@ def create_suggestedexercise():
 
     emotions = (models.Emotion
          .select(
-         models.Emotion, models.EmotionTags, models.Tag)
+           models.Tag.id.alias("tag_id")
+         , fn.Count(models.Tag.id).alias("count")
+         )
          .join(models.EmotionTags, on=(models.Emotion.id==models.EmotionTags.emotion_id))
          .join(models.Tag, on=(models.EmotionTags.tag_id==models.Tag.id))
          .where(models.Emotion.status==True)
+         .group_by(models.Tag.id)
          )
-
-    for emotion in emotions:
-        print('emo')
-        print(emotion.emotion, emotion.id, emotion.emotiontags.emotion_id, emotion.emotiontags.tag_id, emotion.emotiontags.tag.id,
-        emotion.emotiontags.tag.tag
-        )
 
     thoughts = (models.Thought
          .select(
-         models.Thought, models.ThoughtTags, models.Tag)
+           models.Tag.id.alias("tag_id")
+         , fn.Count(models.Tag.id).alias("count")
+         )
          .join(models.ThoughtTags, on=(models.Thought.id==models.ThoughtTags.thought_id))
          .join(models.Tag, on=(models.ThoughtTags.tag_id==models.Tag.id))
          .where(models.Thought.status==True)
+         .group_by(models.Tag.id)
          )
-
-    for thought in thoughts:
-        print('thought')
-        print(thought.thought, thought.id, thought.thoughttags.thought_id, thought.thoughttags.tag_id, thought.thoughttags.tag.id,
-        thought.thoughttags.tag.tag
-        )
 
     behaviors = (models.Behavior
-         .select(
-         models.Behavior, models.BehaviorTags, models.Tag)
-         .join(models.BehaviorTags, on=(models.Behavior.id==models.BehaviorTags.behavior_id))
-         .join(models.Tag, on=(models.BehaviorTags.tag_id==models.Tag.id))
-         .where(models.Behavior.status==True)
-         )
+          .select(
+            models.Tag.id.alias("tag_id")
+          , fn.Count(models.Tag.id).alias("count")
+          )
+          .join(models.BehaviorTags, on=(models.Behavior.id==models.BehaviorTags.behavior_id))
+          .join(models.Tag, on=(models.BehaviorTags.tag_id==models.Tag.id))
+          .where(models.Behavior.status==True)
+          .group_by(models.Tag.id)
+          )
 
-    for behavior in behaviors:
-        print('behavior')
-        print(behavior.behavior, behavior.id, behavior.behaviortags.behavior_id, behavior.behaviortags.tag_id, behavior.behaviortags.tag.id,
-        behavior.behaviortags.tag.tag
-        )
 
+# ETBs MAPPED TO TAGS (TAG IDS)
+    emotions_df = pd.DataFrame(list(emotions.dicts()))
+    thoughts_df = pd.DataFrame(list(thoughts.dicts()))
+    behaviors_df = pd.DataFrame(list(behaviors.dicts()))
+    print(emotions_df)
+    print(thoughts_df)
+    print(behaviors_df)
+
+# COMBINE EBTs INTO ONE TABLE OF TAG COUNTS
+    ebt_tag_count = pd.concat([emotions_df, thoughts_df, behaviors_df])
+    print('ebt_tag_count')
+    print(ebt_tag_count)
+    ebt_totals = ebt_tag_count.groupby('tag_id').sum()
+    print('ebt_totals')
+    print(ebt_totals)
+
+# MAP TAGS (TAG IDS) TO EXERCISE TAGS WHERE TAGS IN DFs
+    exercise_tags = models.Exercise.select(models.Exercise.id.alias("exercise_id")
+    , models.Exercise.name.alias("name")
+    , models.ExerciseTags.tag_id.alias("exercise_tag_id")
+    , models.Tag.tag.alias("tag")
+    , models.Tag.id.alias("tag_id")
+    ).join(models.ExerciseTags,
+    on=models.Exercise.id==models.ExerciseTags.exercise_id).join(models.Tag, on=models.ExerciseTags.tag_id==models.Tag.id)
+
+    exercise_tags_df = pd.DataFrame(list(exercise_tags.dicts()))
+    print(exercise_tags_df)
 
     def queryPSQL():
         return models.Emotion.select(models.Emotion).where(models.Emotion.status==True).execute() # this returns the first emotion ID selected
 
     payload = queryPSQL()
-    for i in payload:
-        print('EMOTION ID SELECTED: '+str(i))
+
     #
     # payload = suggestExercise()
     new_suggestedexercise = models.SuggestedExercise.create(exercise = payload[0])
