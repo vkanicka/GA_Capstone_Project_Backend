@@ -16,7 +16,7 @@ emotion = Blueprint('emotion', 'emotion')
 #--------------------------------------------
 @emotion.route('/', methods=['GET'])
 def emotion_index():
-    result = models.Emotion.select()
+    result = models.Emotion.select().order_by(Emotion.id)
     emotion_dicts = [model_to_dict(emotion) for emotion in result]
     return jsonify({
         'data': emotion_dicts,
