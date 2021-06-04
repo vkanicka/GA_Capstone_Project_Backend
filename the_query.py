@@ -17,6 +17,7 @@ def suggestExercise():
     # for production:
     # truncate postgres, drop and create peewee
 
+    # tables: [emotion, thought, behavior, emotiontags, thoughttags, behaviortags, exercisetags, exercise]
     suggested_exercise_query_result = cur.execute('''
     SELECT EXERCISE.ID, EXERCISE.NAME, EXERCISE.DESCRIPTION FROM (
       SELECT ID AS TAG_ID, TAG, SUM(COUNT) AS TOTAL FROM
