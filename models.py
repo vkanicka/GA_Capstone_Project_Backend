@@ -170,16 +170,11 @@ def initialize():
     DATABASE.connect()
     tables = [User, Exercise, SuggestedExercise, UserExercise, Tag, ExerciseTags, Emotion, Thought, Behavior, EmotionTags, ThoughtTags, BehaviorTags]
     for table in tables:
-        # DATABASE.drop_table([table], on_delete='CASCADE')
-        # DATABASE.table.drop_table()
-        # DATABASE.truncate_table([table])
-        # DATABASE.create_tables([table], safe=True)
-        # table.drop_table(restart_identity=True, cascade=True)
-        table.truncate_table(restart_identity=True, cascade=True) # this works but duplicates once
+        table.truncate_table(restart_identity=True, cascade=True) # this
         # table.create_table(safe=True)
     for table in tables:
         table.create_table(safe=True)
     # DATABASE.create_tables([User, Exercise, SuggestedExercise, UserExercise, Tag, ExerciseTags, Emotion, Thought, Behavior, EmotionTags, ThoughtTags, BehaviorTags], safe=True)
     print("Initialized database and tables...")
-    add_seeds()
+    # add_seeds()
     DATABASE.close()
