@@ -170,9 +170,10 @@ def initialize():
     DATABASE.connect()
     tables = [User, Exercise, SuggestedExercise, UserExercise, Tag, ExerciseTags, Emotion, Thought, Behavior, EmotionTags, ThoughtTags, BehaviorTags]
     for table in tables:
-        DATABASE.drop_tables([table], safe=True, cascade=True)
+        # DATABASE.drop_tables([table], cascade=True)
+        DATABASE.truncate_table([table],restart_identity=True,cascade=True)
         DATABASE.create_tables([table], safe=True)
-    DATABASE.create_tables([User, Exercise, SuggestedExercise, UserExercise, Tag, ExerciseTags, Emotion, Thought, Behavior, EmotionTags, ThoughtTags, BehaviorTags], safe=True)
+    # DATABASE.create_tables([User, Exercise, SuggestedExercise, UserExercise, Tag, ExerciseTags, Emotion, Thought, Behavior, EmotionTags, ThoughtTags, BehaviorTags], safe=True)
     print("Initialized database and tables...")
     add_seeds()
     DATABASE.close()
