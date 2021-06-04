@@ -170,7 +170,7 @@ def initialize():
     DATABASE.connect()
     tables = [User, Exercise, SuggestedExercise, UserExercise, Tag, ExerciseTags, Emotion, Thought, Behavior, EmotionTags, ThoughtTags, BehaviorTags]
     for table in tables:
-        DATABASE.drop_tables([table], safe=True)
+        DATABASE.drop_tables([table], safe=True, cascade=True)
         DATABASE.create_tables([table], safe=True)
     DATABASE.create_tables([User, Exercise, SuggestedExercise, UserExercise, Tag, ExerciseTags, Emotion, Thought, Behavior, EmotionTags, ThoughtTags, BehaviorTags], safe=True)
     print("Initialized database and tables...")
