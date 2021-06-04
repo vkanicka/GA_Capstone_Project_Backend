@@ -16,7 +16,7 @@ behavior = Blueprint('behavior', 'behavior')
 #--------------------------------------------
 @behavior.route('/', methods=['GET'])
 def behavior_index():
-    result = models.Behavior.select()
+    result = models.Behavior.select().order_by(models.Behavior.id)
     behavior_dicts = [model_to_dict(behavior) for behavior in result]
     return jsonify({
         'data': behavior_dicts,

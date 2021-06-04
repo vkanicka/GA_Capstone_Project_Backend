@@ -16,7 +16,7 @@ thought = Blueprint('thought', 'thought')
 #--------------------------------------------
 @thought.route('/', methods=['GET'])
 def thought_index():
-    result = models.Thought.select()
+    result = models.Thought.select().order_by(models.Thought.id)
     thought_dicts = [model_to_dict(thought) for thought in result]
     return jsonify({
         'data': thought_dicts,
