@@ -35,7 +35,8 @@ def addUserExercise():
 # GET INPUT
 
     payload = request.get_json()
-
+    print("_____CREATE USER EXERCISE PAYLOAD_____")
+    print(payload)
     user_exercise, created = models.UserExercise.get_or_create(
         exercise=payload["exercise"],
         user=current_user.id,
