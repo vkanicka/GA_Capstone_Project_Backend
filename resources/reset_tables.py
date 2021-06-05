@@ -30,11 +30,11 @@ reset = Blueprint('reset', 'reset')
 
 @reset.route('/', methods=["PUT"])
 def reset_tables():
-    models.Emotion.update(status=False)
-    models.Thought.update(status=False)
-    models.Behavior.update(status=False)
+    models.Emotion.update(status=False).execute()
+    models.Thought.update(status=False).execute()
+    models.Behavior.update(status=False).execute()
     return jsonify(
         data = {},
         status = 200,
-        message = 'ETBs status set to False'
+        message = 'ETBs status set to False via reset route'
     ), 200

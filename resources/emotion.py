@@ -64,6 +64,19 @@ def update_emotion(id):
         message = 'resource updated successfully'
     ), 200
 
+
+#--------------------------------------------
+# RESET ALL EMOTIONS TO FALSE
+#--------------------------------------------
+@emotion.route('/reset', methods=["PUT"])
+def reset_emotions():
+    models.Emotion.update(status=False).execute()
+    return jsonify(
+        data = {},
+        status = 200,
+        message = 'emotions reset via emotions reset route'
+    ), 200
+
 #--------------------------------------------
 # DELETE EMOTION
 #--------------------------------------------
