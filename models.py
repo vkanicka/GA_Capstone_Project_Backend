@@ -41,7 +41,7 @@ def add_user_seed():
 
 class Exercise(Model):
     name = CharField()
-    description=CharField()
+    description=CharField(max_length=3000)
     created_at: DateTimeField(default=datetime.datetime.now)
     class Meta:
         database = DATABASE
