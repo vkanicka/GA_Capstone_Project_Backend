@@ -42,28 +42,10 @@ def load_user(user_id):
 #--------------------------------------------
 # CORS
 #--------------------------------------------
-# CORS(exercises, origins=['http://localhost:3000'], # supports_credentials=True
-# )
-# CORS(suggestedexercises, origins=['http://localhost:3000'], # supports_credentials=True
-# )
-# CORS(users, origins=['http://localhost:3000']
-# #, supports_credentials=True
-# )
-# CORS(userexercises, origins=['http://localhost:3000'], # supports_credentials=True
-# )
-# CORS(emotion, origins=['http://localhost:3000'], # supports_credentials=True
-# )
-# CORS(thought, origins=['http://localhost:3000'], #supports_credentials=True
-# )
-# CORS(behavior, origins=['http://localhost:3000'], #supports_credentials=True
-# )
-# CORS(reset, origins=['http://localhost:3000'], supports_credentials=True)
 
 model_list=[exercises, suggestedexercises, users, userexercises, emotion, thought, behavior, reset]
-
 # for model in model_list:
 #     CORS(model, origins=['http://localhost:3000', 'https://my-mental-health-trainer.herokuapp.com'])
-
 for model in model_list:
     CORS(model, origins=['http://localhost:3000', 'https://my-mental-health-trainer.herokuapp.com'], supports_credentials=True)
 
