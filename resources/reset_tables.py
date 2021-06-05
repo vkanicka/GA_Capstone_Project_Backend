@@ -12,18 +12,22 @@ from flask_login import current_user#, login_required
 reset = Blueprint('reset', 'reset')
 
 def reset_query(type):
-    import sqlite3
-    con = sqlite3.connect('capstone.sqlite')
-    cur = con.cursor()
+    # DEVELOPMENT:
+    # import sqlite3
+    # con = sqlite3.connect('capstone.sqlite')
+    # cur = con.cursor()
+    # cur.execute('''
+    # UPDATE '''+type+'''
+    # SET status=False
+    # ;
+    # ''')
+    # con.commit()
+    # con.close()
 
-    cur.execute('''
-    UPDATE '''+type+'''
-    SET status=False
-    ;
-    ''')
-
-    con.commit()
-    con.close()
+    #PRODUCTION
+    models.Emotion.update_table(status=False)
+    models.Thought.update_table(status=False)
+    models.Behavior.update_table(status=False)
 
 
 #--------------------------------------------
