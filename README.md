@@ -50,6 +50,11 @@ Users of this app understand the importance of mental health, but want a more in
  - [x] User
 
 ## Entity Relationship Diagrams
+
+![image](https://user-images.githubusercontent.com/37551471/120900233-58117600-c5f9-11eb-8966-7ccb6d298cd2.png)
+
+
+
 Exercises
 Key | Name | Description
 ------------ | -------------  | -------------
@@ -59,6 +64,12 @@ Key | Name | Description
 4 | Restorative Communication | Follow these steps...
 5 | Explore Strengths | What are 10 things...
 6 | Gratitude | Think of three specific...
+
+Suggested Exercise
+Key | Exercise
+------------ | -------------
+1 | {2 Time Management}
+
 
 Users
 Key | Name | Email | Password
