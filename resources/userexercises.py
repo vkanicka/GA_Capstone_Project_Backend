@@ -41,11 +41,10 @@ def addUserExercise():
         exercise=payload["exercise"],
         user=current_user.id,
         defaults={
-            "exercise" : payload["exercise"],
-            "completed" : payload["completed"],
-            "completed_count" : payload["completed_count"],
-            "favorite" : payload["favorite"],
-            "recommended" : payload["recommended"]
+            'completed': 0,
+            'completed_count': 0,
+            'favorite': 0,
+            'recommended': 0
         }
     )
     user_exercise_dict = model_to_dict(user_exercise)
