@@ -35,31 +35,31 @@ def addUserExercise():
 # GET INPUT
 
     payload = request.get_json()
-    print("_____CREATE USER EXERCISE PAYLOAD_____")
-    print(payload)
-    user_exercise, created = models.UserExercise.get_or_create(
-        exercise=payload["exercise"],
-        user=current_user.id,
-        defaults={
-            'completed': 0,
-            'completed_count': 0,
-            'favorite': 0,
-            'recommended': 0
-        }
-    )
-    user_exercise_dict = model_to_dict(user_exercise)
-    if (created):
+
+
+    try:
+        models.UserExercise.get(models.UserExercise.exercise == payload["exercise"])
+
+        return jsonify(
+            data={},
+            message=f"Exercise {payload['exercise']} has already been added.",
+            status=401
+        ), 401
+    except models.DoesNotExist:
+        new_exercise = models.UserExercise.create(
+            user= current_user.id,
+            exercise = payload['exercise'],
+            completed = payload['completed'],
+            completed_count = payload['completed_count'],
+            favorite = payload['favorite'],
+            recommended = payload['recommended']
+        )
+        user_exercise_dict = model_to_dict(new_exercise)
         return jsonify(
             data=user_exercise_dict,
-            message='User exercise was added!',
+            message='Successfully added exercise to user!',
             status=201
         ), 201
-    else:
-        return jsonify(
-            data=user_exercise_dict,
-            message="User already existed",
-            status=200
-        )
 
 #--------------------------------------------
 # SHOW USER EXERCISE
