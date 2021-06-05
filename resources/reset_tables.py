@@ -25,9 +25,9 @@ def reset_query(type):
     # con.close()
 
     #PRODUCTION
-    models.Emotion.update_table(status=False)
-    models.Thought.update_table(status=False)
-    models.Behavior.update_table(status=False)
+    models.Emotion.update(status=False)
+    models.Thought.update(status=False)
+    models.Behavior.update(status=False)
 
 
 #--------------------------------------------
