@@ -33,4 +33,8 @@ def reset_tables():
     models.Emotion.update(status=False)
     models.Thought.update(status=False)
     models.Behavior.update(status=False)
-    return('reset tables')
+    return jsonify(
+        data = {},
+        status = 200,
+        message = 'ETBs status set to False'
+    ), 200
