@@ -50,6 +50,10 @@ Users of this app understand the importance of mental health, but want a more in
  - [x] User
 
 ## Entity Relationship Diagrams
+
+![image](https://user-images.githubusercontent.com/37551471/120899579-061b2100-c5f6-11eb-98eb-7671b1c7f6fd.png)
+
+
 Exercises
 Key | Name | Description
 ------------ | -------------  | -------------
