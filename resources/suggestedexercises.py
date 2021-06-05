@@ -101,14 +101,11 @@ def create_suggestedexercise():
     print(f"THE ANSWER IS {answer}")
     print(type(answer))
 
+    models.Emotion.update(status=False)
+    models.Thought.update(status=False)
+    models.Behavior.update(status=False)
 
-    def queryPSQL():
-        return models.Emotion.select(models.Emotion).where(models.Emotion.status==True).execute() # this returns the first emotion ID selected
 
-    payload = queryPSQL()
-
-    #
-    # payload = suggestExercise()
     new_suggestedexercise = models.SuggestedExercise.create(exercise = answer)
     suggestedexercise_dict = model_to_dict(new_suggestedexercise)
     return jsonify(
