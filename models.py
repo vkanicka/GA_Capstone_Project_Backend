@@ -15,6 +15,8 @@ from resources.seeds.thoughts import thoughts
 from resources.seeds.thought_tags import thought_tags
 from resources.seeds.behaviors import behaviors
 from resources.seeds.behavior_tags import behavior_tags
+from markdown import markdown
+
 
 #--------------------------------------------
 # DATABASE ENVIRONMENT
@@ -41,7 +43,7 @@ def add_user_seed():
 
 class Exercise(Model):
     name = CharField()
-    description=CharField(max_length=3000)
+    description=TextField()
     created_at: DateTimeField(default=datetime.datetime.now)
     class Meta:
         database = DATABASE
