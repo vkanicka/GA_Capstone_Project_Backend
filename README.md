@@ -66,7 +66,7 @@ Key | Name | Description
 
 Suggested Exercise
 Key | Exercise
------------- | -------------  | -------------
+------------ | -------------
 1 | {2 Time Management}
 
 
