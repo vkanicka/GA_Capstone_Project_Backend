@@ -38,7 +38,7 @@ def create_suggestedexercise():
     # from the_query import clearSuggestedExerciseTable
     # clearSuggestedExerciseTable()
     # from the_query import suggestExercise
-    models.SuggestedExercise.truncate_table()
+    models.SuggestedExercise.truncate_table(restart_identity=True)
 
 
     emotions = (models.Emotion
