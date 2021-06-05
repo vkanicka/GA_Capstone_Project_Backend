@@ -64,6 +64,12 @@ Key | Name | Description
 5 | Explore Strengths | What are 10 things...
 6 | Gratitude | Think of three specific...
 
+Suggested Exercise
+Key | Exercise
+------------ | -------------  | -------------
+1 | {2 Time Management}
+
+
 Users
 Key | Name | Email | Password
 ------------ | -------------  | -------------  | -------------
